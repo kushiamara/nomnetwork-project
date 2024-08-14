@@ -55,4 +55,3 @@ def update_menu_item():
     r = cursor.execute(query, data)
     db.get_db().commit()
     return 'Menu item successfully updated!'
-    
