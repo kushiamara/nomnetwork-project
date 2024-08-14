@@ -97,8 +97,9 @@ def create_app():
     # and give a url prefix to each
     app.register_blueprint(customers,   url_prefix='/c')
     app.register_blueprint(products,    url_prefix='/p')
-    app.register_blueprint(restaurants,    url_prefix='/r')
+    app.register_blueprint(restaurants, url_prefix='/r')
     app.register_blueprint(diner,    url_prefix='/d')
+    
 
     # Don't forget to return the app object
     return app
