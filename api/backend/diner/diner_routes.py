@@ -85,3 +85,57 @@ def get_reviews(userId):
     return the_response
 
 
+# add a new review to the app
+@diner.route('/newreview', methods=['POST'])
+def add_new_review():
+    
+    # collecting data from the request object 
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    #extracting the variable
+    rating = the_data['rating']
+    text = the_data['text']
+    authorId = the_data['authorId']
+    restId = the_data['restId']
+
+    # Constructing the query
+    query = 'insert into reviews (rating, text, authorId, restId) values ("'
+    query += rating + '", "'
+    query += text + '", "'
+    query += authorId + '", '
+    query += restId + ')'
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    
+    return 'You have successfully added a review!'
+
+
+# search for restaurants based on tags
+@diner.route('/diner/<tagId1>/<tagId2>/<tagId3>', methods=['GET'])
+def search_restaurants(tagId1, tagId2, tagId3):
+    current_app.logger.info('GET /diner/<tagId1>/<tagId2>/<tagId3> route')
+    cursor = db.get_db().cursor()
+    cursor.execute(
+    '''SELECT DISTINCT
+        restName as RestaurantName,
+        websiteLink
+        FROM Restaurants r
+        JOIN RestaurantTags rt ON r.restId = rt.restId
+        JOIN Tags t ON rt.tagId = t.tagId
+        WHERE tagId in ({0},{1},{2})'''.format(tagId1, tagId2, tagId3))
+    # row_headers = [x[0] for x in cursor.description]
+    # json_data = []
+    theData = cursor.fetchall()
+    # for row in theData:
+    #     json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
