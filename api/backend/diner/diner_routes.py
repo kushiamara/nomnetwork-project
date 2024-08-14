@@ -56,7 +56,7 @@ def predict_value(var01, var02):
 #     db.get_db().commit()
 #     return 'Menu item successfully updated!'
 
-# Get customer detail for customer with particular userID
+# Get reviews for the people that the given userId follows
 @diner.route('/diner/<userId>', methods=['GET'])
 def get_reviews(userId):
     current_app.logger.info('GET /diner/<userId> route')
