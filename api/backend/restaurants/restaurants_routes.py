@@ -40,18 +40,18 @@ def get_restaurants():
 
 # Update a menu item
 @restaurants.route('/restaurants', methods=['PUT'])
-def update_customer():
-    current_app.logger.info('PUT /customers route')
-    cust_info = request.json
+def update_menu_item():
+    current_app.logger.info('PUT /restaurants route')
+    menu_info = request.json
     # current_app.logger.info(cust_info)
-    cust_id = cust_info['id']
-    first = cust_info['first_name']
-    last = cust_info['last_name']
-    company = cust_info['company']
+    restId = menu_info['restId']
+    itemName = menu_info['itemName']
+    price = menu_info['price']
+    calories = menu_info['calories']
 
-    query = 'UPDATE customers SET first_name = %s, last_name = %s, company = %s where id = %s'
-    data = (first, last, company, cust_id)
+    query = 'UPDATE MenuItems SET price = %s, calories = %s WHERE restId = %s and itemName = %s'
+    data = (restId, itemName, price, calories)
     cursor = db.get_db().cursor()
     r = cursor.execute(query, data)
     db.get_db().commit()
-    return 'customer updated!'
+    return 'Menu item successfully updated!'
