@@ -34,9 +34,9 @@ SideBarLinks(show_home=True)
 
 # set the title of the page and provide a simple prompt. 
 logger.info("Loading the Home page of the app")
-st.title('The Nomnetwork App')
+st.title('The NomNetwork App')
 st.write('\n\n')
-st.write('### HI! As which user would you like to log in?')
+st.write('### Hi! Which user type would ?')
 
 # For each of the user personas for which we are implementing
 # functionality, we put a button on the screen that the user 
