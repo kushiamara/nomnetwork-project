@@ -6,6 +6,7 @@ from flask import Flask
 from backend.db_connection import db
 from backend.customers.customer_routes import customers
 from backend.products.products_routes import products
+from backend.restaurants.restaurants_routes import restaurants
 import os
 from dotenv import load_dotenv
 
@@ -27,7 +28,7 @@ def create_app():
     app.config['MYSQL_DATABASE_PASSWORD'] = os.getenv('MYSQL_ROOT_PASSWORD')
     app.config['MYSQL_DATABASE_HOST'] = os.getenv('DB_HOST')
     app.config['MYSQL_DATABASE_PORT'] = int(os.getenv('DB_PORT'))
-    app.config['MYSQL_DATABASE_DB'] = os.getenv('DB_NAME')  # Change this to your DB name
+    app.config['MYSQL_DATABASE_DB'] = os.getenv('DB_NAME')  
 
     # Initialize the database object with the settings above. 
     db.init_app(app)
@@ -95,6 +96,7 @@ def create_app():
     # and give a url prefix to each
     app.register_blueprint(customers,   url_prefix='/c')
     app.register_blueprint(products,    url_prefix='/p')
+    app.register_blueprint(restaurants,    url_prefix='/r')
 
     # Don't forget to return the app object
     return app
