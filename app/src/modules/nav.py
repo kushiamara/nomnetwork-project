@@ -11,13 +11,13 @@ def AboutPageNav():
 
 #### ------------------------ Examples for Role of pol_strat_advisor ------------------------
 def PolStratAdvHomeNav():
-    st.sidebar.page_link("pages/00_Pol_Strat_Home.py", label="Political Strategist Home", icon='👤')
+    st.sidebar.page_link("pages/00_Data_Analyst.py", label="Data Analyst Home", icon='👤')
 
 def WorldBankVizNav():
-    st.sidebar.page_link("pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon='🏦')
+    st.sidebar.page_link("pages/01_Popular_Rest.py", label="Popular Restaurants", icon='🏦')
 
 def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon='🗺️')
+    st.sidebar.page_link("pages/02_Popular_Tags.py", label="Popular Tags", icon='🗺️')
 
 ## ------------------------ Examples for Role of usaid_worker ------------------------
 def ApiTestNav():
