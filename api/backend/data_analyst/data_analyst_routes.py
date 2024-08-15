@@ -34,7 +34,8 @@ def get_tags():
     cursor.execute('SELECT tagName, COUNT(tagName) as NumTimesUsed  \
         FROM RestaurantTags rt JOIN Tags t ON rt.tagId = t.tagId \
         GROUP BY tagName \
-        ORDER BY NumTimesUsed desc, tagName asc; ')
+        ORDER BY NumTimesUsed desc, tagName asc \
+        LIMIT 20; ')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
