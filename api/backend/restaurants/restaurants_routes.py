@@ -116,6 +116,26 @@ def get_tags(restId):
     the_response.mimetype = 'application/json'
     return the_response
 
+# tag POST route to add a tag to the restaurant
+@restaurants.route('/restaurants/tags', methods=['POST'])
+def add_tag():
+    # collecting data from the request object 
+    the_data = request.json
+    # return the_data
+    current_app.logger.info(the_data)
+    # extracting the variable
+    restId = the_data['restId']
+    tagId = the_data['tagId']
+    # return {"query":"test"}
+    # Constructing the query
+    sql = '''INSERT into RestaurantTags (tagId, restId) values ({0}, {1})'''.format(tagId, restId)
+    current_app.logger.info(sql)
+    # return {"query":sql}
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(sql)
+    db.get_db().commit()
+    return {"result": 'You have successfully added a tag to the restaurant!'}
 
 # # Get all restaurants from the DB
 # @restaurants.route('/restaurants', methods=['GET'])
