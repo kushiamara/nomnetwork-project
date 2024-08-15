@@ -47,10 +47,10 @@ CREATE TABLE IF NOT EXISTS Restaurants (
  city VARCHAR(25),
  state VARCHAR(50),
  zipcode CHAR(5),
- websiteLink VARCHAR(255),
+ websiteLink TEXT,
  cName VARCHAR(100),
  cEmail VARCHAR(255),
- cPhoneNumber VARCHAR(10),
+ cPhoneNumber VARCHAR(20),
  photo VARCHAR(2000),
  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
