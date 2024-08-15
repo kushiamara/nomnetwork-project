@@ -69,6 +69,7 @@ def get_menu_item(restId, itemName):
 # menuitem PUT route to update a menu item
 @restaurants.route('/restaurants/menuitem/<restId>/<itemName>', methods=['PUT'])
 def update_menu_item(restId, itemName):
+    current_app.logger.info('restaurant_routes.py: PUT /menuitems/<restId>/<itemName>')
     # collecting data from the request object 
     the_data = request.json
     # return the_data
@@ -83,6 +84,17 @@ def update_menu_item(restId, itemName):
     cursor.execute("UPDATE MenuItems SET itemName = '{0}', price = {1}, calories = {2}, photo = '{3}' WHERE restId = {4} AND LCASE(REPLACE(itemName, ' ','')) = '{5}'".format(name, price, calories, photo, restId, str(itemName).casefold()))
     db.get_db().commit()
     return 'Item updated!'
+
+# menuitem DELETE route to delete a menu item
+@restaurants.route('/restaurants/menuitem/<restId>/<itemName>', methods=['DELETE'])
+def delete_menu_item(restId, itemName):  
+    current_app.logger.info('restaurant_routes.py: DELETE /menuitems/<restId>/<itemName>')
+
+    cursor = db.get_db().cursor()
+    cursor.execute("DELETE FROM MenuItems WHERE restId = {0} AND LCASE(REPLACE(itemName, ' ','')) = '{1}'".format(restId, str(itemName).casefold()))
+    db.get_db().commit()
+
+    return 'Item deleted'
 
 # tags GET method to return all the restaurants tags
 @restaurants.route('/restaurants/tags/<restId>', methods=['GET'])
