@@ -239,8 +239,8 @@ VALUES (4.2, 'great food! really nice atmosphere and service.', 2, 1),
 
 
 INSERT INTO ReviewPhotos (reviewId, photo)
-VALUES (2, 'https://www.google.com/imgres?q=biden%20falling%20down%20stairs&imgurl=https%3A%2F%2Fs.abcnews.com%2Fimages%2FPolitics%2Fbiden-stumble-03-ht-jt-210319_1616181267869_hpMain_2_16x9_1600.jpg&imgrefurl=https%3A%2F%2Fabcnews.go.com%2FPolitics%2Fbiden-fine-tripping-times-jogging-steps-air-force%2Fstory%3Fid%3D76561006&docid=J2IeWSq45PD2cM&tbnid=JcA4mBYU2knQBM&vet=12ahUKEwi82ueEpuaHAxWBl4kEHUp0OXIQM3oECBgQAA..i&w=1600&h=900&hcb=2&ved=2ahUKEwi82ueEpuaHAxWBl4kEHUp0OXIQM3oECBgQAA'),
-      (1, 'https://www.google.com/url?sa=i&url=https%3A%2F%2Forders.co%2Fblog%2Fitalian-restaurant-design%2F&psig=AOvVaw3Gb1nN_BE_JpZfXvJcemC8&ust=1723237754104000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLDagYen5ocDFQAAAAAdAAAAABAE');
+VALUES (2, 'https://s.abcnews.com/images/Politics/biden-stumble-03-ht-jt-210319_1616181267869_hpMain_2_16x9_1600.jpg'),
+      (1, 'https://www.allrecipes.com/thmb/mvO1mRRH1zTz1SvbwBCTz78CRJI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/67700_RichPastaforthePoorKitchen_ddmfs_4x3_2284-220302ec8328442096df370dede357d7.jpg');
 
 
 INSERT INTO ReviewViews (reviewId, viewerId) VALUES (2, 1), (2, 2), (3, 3);
