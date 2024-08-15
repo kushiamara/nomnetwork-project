@@ -66,12 +66,11 @@ def get_reviews(username):
             u.username,
             r.rating,
             r.text,
-            rp.photo
+            r.photo
         FROM Users me
         JOIN Followers f ON me.userId = f.followerId
         JOIN Reviews r ON f.followeeId = r.authorId
         JOIN Users u ON r.authorId = u.userId
-        LEFT JOIN ReviewPhotos rp ON r.reviewId = rp.reviewID
         WHERE me.username = '{0}' '''.format(username)
     cursor.execute(sql)
     theData = cursor.fetchall()
@@ -94,9 +93,10 @@ def add_new_review():
     text = the_data['text']
     authorId = the_data['authorId']
     restId = the_data['restId']
+    photo = the_data['photo']
     # return {"query":"test"}
     # Constructing the query
-    sql = '''INSERT into Reviews (rating, text, authorId, restId) values ({0}, '{1}', {2}, {3})'''.format(rating, text, authorId, restId)
+    sql = '''INSERT into Reviews (rating, text, authorId, restId, photo) values ({0}, '{1}', {2}, {3}, '{4}')'''.format(rating, text, authorId, restId, photo)
     current_app.logger.info(sql)
     # return {"query":sql}
     # executing and committing the insert statement 
