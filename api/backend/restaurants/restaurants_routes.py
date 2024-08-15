@@ -26,15 +26,15 @@ def get_menu_items(restId):
     return the_response
 
 # menuitems POST route to add a menu item
-@restaurants.route('/restaurants/menuitems/<restId>', methods=['POST'])
-def add_menu_item(restId):
+@restaurants.route('/restaurants/menuitems', methods=['POST'])
+def add_menu_item():
     # collecting data from the request object 
     the_data = request.json
     # return the_data
     current_app.logger.info(the_data)
     # extracting the variable
     itemName = the_data['itemName']
-    # return rating
+    restId = the_data['restId']
     price = the_data['price']
     calories = the_data['calories']
     photo = the_data['photo']
@@ -65,6 +65,29 @@ def get_menu_item(restId, itemName):
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+# menuitem PUT route to update a menu item
+@restaurants.route('/restaurants/menuitem/<restId>/<itemName>', methods=['PUT'])
+def update_menu_item():
+    # collecting data from the request object 
+    the_data = request.json
+    # return the_data
+    current_app.logger.info(the_data)
+    # extracting the variable
+    itemName = the_data['itemName']
+    price = the_data['price']
+    calories = the_data['calories']
+    photo = the_data['photo']
+    # return {"query":"test"}
+    # Constructing the query
+    sql = '''INSERT into MenuItems (itemName, price, calories, photo) values ('{0}', {1}, {2}, '{4}')'''.format(itemName, price, calories, photo)
+    current_app.logger.info(sql)
+    # return {"query":sql}
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(sql)
+    db.get_db().commit()
+    return {"result": 'You have successfully added a menu item!'}
 
 # tags GET method to return all the restaurants tags
 @restaurants.route('/restaurants/tags/<restId>', methods=['GET'])
