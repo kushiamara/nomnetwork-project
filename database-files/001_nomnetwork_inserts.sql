@@ -259,7 +259,7 @@ INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (26,37,'2023-10
 INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (1,29,'2024-07-30 17:20:56');
 INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (18,21,'2024-03-28 23:27:11');
 
--Comments
+--Comments
 INSERT INTO Comments (commentId, text, reviewId, commenterId, timePosted, updatedAt) VALUES ('1', 'In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem.', '19', '29', '2017-04-29 03:09:26', '2021-12-15 23:08:45');
 INSERT INTO Comments (commentId, text, reviewId, commenterId, timePosted, updatedAt) VALUES ('2', 'Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst.', '24', '32', '2021-10-07 09:01:31', '2022-06-18 22:47:26');
 INSERT INTO Comments (commentId, text, reviewId, commenterId, timePosted, updatedAt) VALUES ('3', 'Vestibulum sed magna at nunc commodo placerat. Praesent blandit.', '8', '6', '2023-11-06 08:52:10', '2022-06-08 10:43:27');
