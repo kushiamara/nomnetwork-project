@@ -61,9 +61,9 @@ if st.button('Act as Emily Thompson, a Diner',
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'usaid_worker'
-    st.session_state['first_name'] = 'Mohammad'
-    st.switch_page('pages/10_USAID_Worker_Home.py')
+    st.session_state['role'] = 'diner'
+    st.session_state['first_name'] = 'Emily'
+    st.switch_page('pages/10_Diner_Home.py')
 
 if st.button('Act as Marco Fontenot, a Restaurant Owner', 
             type = 'primary', 

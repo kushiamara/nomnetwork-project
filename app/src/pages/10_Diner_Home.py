@@ -27,4 +27,4 @@ if st.button('View Reviews from People I Follow',
 if st.button("Post a New Review",
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/13_Classification.py')
+  st.switch_page('pages/13_Post_New_Review.py')
