@@ -8,7 +8,7 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('Edit My Promotions')
+st.title('Edit My Restaurant`s Menu')
 
 # st.write('\n\n')
 # st.write('## Model 1 Maintenance')

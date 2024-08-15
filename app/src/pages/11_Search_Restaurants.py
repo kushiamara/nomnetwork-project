@@ -12,36 +12,32 @@ SideBarLinks()
 
 st.title('Search for Restaurants by Tags')
 
-# # create a 2 column layout
-# col1, col2 = st.columns(2)
+# Fetch tags data from the Flask API
+try:
+    response = requests.get('http://api:4000/d/diner/tags')
+    response.raise_for_status()  # Raise an error for bad status codes
+    tags_data = response.json()  # Parse the JSON response
 
-# # add one number input for variable 1 into column 1
-# with col1:
-#   var_01 = st.number_input('Variable 01:',
-#                            step=1)
+    # Extract tag names from the data
+    tag_names = [tag['tagName'] for tag in tags_data]
 
-# # add another number input for variable 2 into column 2
-# with col2:
-#   var_02 = st.number_input('Variable 02:',
-#                            step=1)
+except requests.RequestException as e:
+    st.error(f"Error fetching tags data: {e}")
+    tag_names = []
 
-# logger.info(f'var_01 = {var_01}')
-# logger.info(f'var_02 = {var_02}')
-
-# add a button to use the values entered into the number field to send to the 
-# prediction function via the REST API
-
+# Display multiselect with tags as options
 options = st.multiselect(
     "What restaurant features are you looking for?",
-    ["Green", "Yellow", "Red", "Blue"],
+    tag_names,
     [],
 )
 
 st.write("You selected:", options)
 
-# if st.button('Search',
-#              type='primary',
-#              use_container_width=True):
-#   results = requests.get(f'http://api:4000/d/diner/{var_01}/{var_02}').json()
-#   st.dataframe(results)
+
+if st.button('Search',
+             type='primary',
+             use_container_width=True):
+  results = requests.get('http://api:4000/d/diner').json()
+  st.dataframe(results)
   
