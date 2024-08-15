@@ -1,5 +1,7 @@
 use nomnetwork;
+-- Insert statements to add mockaroo data to each table
 
+-- Users
 INSERT INTO Users(userId,username,firstName,lastName,email,streetAddress,city,state,zipcode,dob,createdAt,updatedAt) VALUES (4,'gvaugham3','Geoff','Vaugham','gvaugham3@google.it','9 Hollow Ridge Park','Boston','MA',02109,'2005-02-15','2014-06-10 15:53:58','2022-01-23 09:28:48');
 INSERT INTO Users(userId,username,firstName,lastName,email,streetAddress,city,state,zipcode,dob,createdAt,updatedAt) VALUES (5,'sdeye4','Sara-ann','D''eye','sdeye4@sourceforge.net','9 Kennedy Parkway','Watertown','MA',02472,'2009-02-14','2018-12-21 04:23:31','2022-08-04 12:43:25');
 INSERT INTO Users(userId,username,firstName,lastName,email,streetAddress,city,state,zipcode,dob,createdAt,updatedAt) VALUES (6,'awallenger5','Adrienne','Wallenger','awallenger5@technorati.com','73524 Burning Wood Place','Newton','MA',02162,'2005-10-07','2014-03-12 18:02:13','2021-08-07 10:20:31');
@@ -38,6 +40,7 @@ INSERT INTO Users(userId,username,firstName,lastName,email,streetAddress,city,st
 INSERT INTO Users(userId,username,firstName,lastName,email,streetAddress,city,state,zipcode,dob,createdAt,updatedAt) VALUES (39,'pfradgley12','Parke','Fradgley','pfradgley12@businessinsider.com','45 John Wall Park','Boston','MA',02109,'2013-09-07','2015-12-18 09:02:48','2024-01-06 06:57:07');
 INSERT INTO Users(userId,username,firstName,lastName,email,streetAddress,city,state,zipcode,dob,createdAt,updatedAt) VALUES (40,'dglasser13','Dre','Glasser','dglasser13@goodreads.com','75 Lake View Parkway','Boston','MA',02119,'2006-10-07','2019-06-09 04:42:00','2021-12-19 14:41:40');
 
+-- Restaurants
 INSERT INTO Restaurants(restId,restName,bio,streetAddress,city,state,zipCode,websiteLink,cName,cEmail,cPhoneNumber,photo) VALUES (1,'Koepp Inc','In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.
 
 Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.
@@ -154,3 +157,105 @@ INSERT INTO Restaurants(restId,restName,bio,streetAddress,city,state,zipCode,web
 In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.
 
 Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.','8547 Larry Point','Boston','MA',5,'http://hud.gov/enim/blandit.js?potenti=in&nullam=libero&porttitor=ut&lacus=massa&at=volutpat&turpis=convallis&donec=morbi&posuere=odio&metus=odio&vitae=elementum&ipsum=eu&aliquam=interdum&non=eu&mauris=tincidunt&morbi=in&non=leo&lectus=maecenas&aliquam=pulvinar&sit=lobortis&amet=est&diam=phasellus&in=sit&magna=amet&bibendum=erat&imperdiet=nulla&nullam=tempus&orci=vivamus&pede=in&venenatis=felis&non=eu&sodales=sapien&sed=cursus&tincidunt=vestibulum&eu=proin&felis=eu&fusce=mi&posuere=nulla&felis=ac&sed=enim&lacus=in&morbi=tempor&sem=turpis&mauris=nec&laoreet=euismod&ut=scelerisque&rhoncus=quam&aliquet=turpis&pulvinar=adipiscing&sed=lorem&nisl=vitae&nunc=mattis&rhoncus=nibh&dui=ligula&vel=nec&sem=sem&sed=duis','Stacey Antonopoulos','santonopoulos13@ebay.co.uk','617-669-6594','http://dummyimage.com/185x100.png/5fa2dd/ffffff');
+
+-- Followers
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (14,18,'2024-03-15 04:50:10');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (15,29,'2024-03-06 08:05:48');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (35,21,'2024-04-25 18:04:27');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (2,38,'2023-10-29 09:08:26');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (4,11,'2024-04-24 20:59:27');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (28,4,'2023-10-16 21:30:55');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (31,23,'2024-01-01 02:28:00');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (6,4,'2023-09-04 03:32:36');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (32,28,'2023-10-31 13:03:06');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (26,21,'2023-09-25 23:47:49');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (24,6,'2023-12-31 05:18:16');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (35,7,'2023-10-14 05:04:12');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (27,9,'2024-04-21 09:44:11');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (35,18,'2024-08-12 11:40:24');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (12,24,'2024-07-23 18:27:22');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (33,24,'2024-05-27 23:37:35');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (35,13,'2024-07-23 15:31:01');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (34,5,'2024-03-28 06:46:46');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (26,40,'2024-01-10 10:37:47');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (9,4,'2024-04-26 19:10:44');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (28,38,'2023-08-27 18:11:21');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (18,38,'2023-10-17 06:38:57');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (6,12,'2024-03-12 22:31:16');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (24,27,'2024-08-03 00:29:08');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (37,25,'2024-04-16 06:11:27');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (22,35,'2023-11-21 12:25:21');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (38,23,'2023-09-21 07:38:03');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (15,26,'2024-07-23 17:54:55');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (6,24,'2024-07-13 22:36:56');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (34,30,'2023-10-18 21:09:24');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (25,7,'2024-06-09 08:09:57');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (36,16,'2024-03-05 13:22:42');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (26,12,'2024-04-24 14:54:47');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (27,8,'2024-07-26 00:28:15');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (13,13,'2023-12-04 07:17:24');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (37,17,'2023-10-29 01:31:42');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (14,10,'2023-09-14 06:53:01');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (33,23,'2024-03-20 02:12:00');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (7,40,'2024-06-22 23:44:42');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (11,30,'2023-11-21 14:51:42');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (26,32,'2024-01-12 14:27:20');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (13,14,'2024-01-22 11:10:41');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (6,32,'2024-02-15 23:46:16');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (14,23,'2024-07-10 05:59:40');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (27,21,'2023-11-21 05:21:00');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (15,17,'2023-11-14 02:28:08');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (32,20,'2024-03-23 04:21:49');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (39,15,'2024-03-24 20:14:48');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (40,29,'2024-02-04 11:48:26');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (17,7,'2023-11-12 03:14:51');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (8,19,'2024-03-21 07:13:21');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (1,11,'2024-02-23 22:08:29');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (33,21,'2024-07-30 18:17:04');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (2,28,'2024-07-03 17:36:10');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (3,31,'2023-08-18 23:21:49');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (10,38,'2024-05-25 06:36:48');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (9,26,'2023-08-20 18:52:47');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (27,15,'2024-08-12 04:47:49');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (38,28,'2024-06-28 04:11:45');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (40,18,'2023-09-10 19:16:39');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (32,9,'2023-08-31 22:37:40');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (16,33,'2023-11-14 17:04:11');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (7,28,'2024-05-25 17:13:00');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (2,33,'2023-10-26 12:52:08');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (21,12,'2023-11-26 11:18:21');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (40,7,'2024-07-24 19:27:27');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (1,40,'2024-04-24 02:09:07');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (29,35,'2024-02-04 13:40:55');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (25,8,'2023-09-28 03:54:53');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (1,13,'2024-08-01 10:32:30');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (17,3,'2024-04-21 04:59:45');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (13,35,'2024-01-19 11:09:06');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (22,36,'2024-08-01 16:06:32');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (21,10,'2024-03-07 18:20:35');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (20,26,'2023-10-12 14:24:25');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (7,36,'2023-11-02 02:38:16');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (4,1,'2023-12-06 03:50:26');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (9,39,'2023-09-02 17:47:39');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (37,11,'2024-01-07 21:19:20');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (38,25,'2023-09-02 17:57:05');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (23,16,'2024-05-18 15:58:32');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (10,30,'2024-04-21 07:36:58');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (21,31,'2023-08-28 04:06:47');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (39,13,'2023-10-08 05:16:50');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (40,9,'2023-11-11 02:38:15');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (23,11,'2023-10-04 17:51:15');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (15,10,'2024-01-24 10:27:05');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (30,40,'2023-08-26 21:59:15');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (34,16,'2024-02-17 20:48:23');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (2,20,'2023-09-21 04:17:41');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (25,12,'2024-05-28 17:00:35');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (22,21,'2024-01-03 12:55:07');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (9,25,'2023-12-28 03:09:05');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (9,12,'2024-05-14 03:27:53');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (11,17,'2023-09-07 23:03:21');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (24,35,'2024-04-21 17:45:20');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (25,24,'2024-04-01 03:26:30');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (26,37,'2023-10-05 14:40:28');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (1,29,'2024-07-30 17:20:56');
+INSERT INTO Followers(followerId,followeeId,timeFollowed) VALUES (18,21,'2024-03-28 23:27:11');
