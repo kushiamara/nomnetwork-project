@@ -17,7 +17,7 @@ st.write('### What would you like to do today?')
 if st.button('Search for Restaurants', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/11_Prediction.py')
+  st.switch_page('pages/11_Search_Restaurants.py')
 
 if st.button('View Reviews from People I Follow', 
              type='primary',
