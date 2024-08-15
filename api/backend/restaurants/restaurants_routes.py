@@ -8,15 +8,34 @@ from backend.ml_models.model01 import predict
 
 restaurants = Blueprint('restaurants', __name__)
 
-@restaurants.route('/prediction/<var01>/<var02>', methods=['GET'])
-def predict_value(var01, var02):
-    current_app.logger.info(f'var01 = {var01}')
-    current_app.logger.info(f'var02 = {var02}')
+@restaurants.route('/restaurants/menuitems', methods=['GET'])
+def get_menu_items():
+    current_app.logger.info('restaurant_routes.py: GET /menuitems')
 
-    returnVal = predict(var01, var02)
-    return_dict = {'result': returnVal}
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT itemName, restId, price, calories, photo FROM MenuItems WHERE restId = 1;')
+    # row_headers = [x[0] for x in cursor.description]
+    # json_data = []
+    theData = cursor.fetchall()
+    # for row in theData:
+    #     json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
 
-    the_response = make_response(jsonify(return_dict))
+@restaurants.route('/restaurants/menuitem/<itemName>', methods=['GET'])
+def get_menu_item(itemName):
+    current_app.logger.info('restaurant_routes.py: GET /menuitems/<itemName>')
+
+    cursor = db.get_db().cursor()
+    cursor.execute("SELECT itemName, restId, price, calories, photo FROM MenuItems WHERE restId = 1 AND LCASE(REPLACE(itemName, ' ','')) = '{0}'".format(str(itemName).casefold()))
+    # row_headers = [x[0] for x in cursor.description]
+    # json_data = []
+    theData = cursor.fetchall()
+    # for row in theData:
+    #     json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(theData)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
@@ -39,7 +58,7 @@ def get_restaurants():
     return the_response
 
 # Update a menu item
-@restaurants.route('/restaurants', methods=['PUT'])
+@restaurants.route('/restaurants/<newItem>', methods=['PUT'])
 def update_menu_item():
     current_app.logger.info('PUT /restaurants route')
     menu_info = request.json
