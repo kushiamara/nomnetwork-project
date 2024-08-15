@@ -223,7 +223,7 @@ VALUES ('Margherita Pizza',1, 16.00, 800, 'https://images.app.goo.gl/GNh3CAewYvQ
       ('Steak Quesadillas', 2, 34, 480, 'https://images.app.goo.gl/NECD4rauM5pKiPp6A');
 
 
-INSERT INTO Reviews (rating, text, authorId, restId)
+INSERT INTO Reviews (rating, text, authorId, restId, photo)
 VALUES (4.2, 'great food! really nice atmosphere and service.', 2, 1, 'https://www.allrecipes.com/thmb/mvO1mRRH1zTz1SvbwBCTz78CRJI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/67700_RichPastaforthePoorKitchen_ddmfs_4x3_2284-220302ec8328442096df370dede357d7.jpg'),
      (5, 'Best meal I ever had', 3, 2, 'https://s.abcnews.com/images/Politics/biden-stumble-03-ht-jt-210319_1616181267869_hpMain_2_16x9_1600.jpg') ,
      (2.3, 'Pretty mid tbh', 2, 3, 'https://bostons.imgix.net/DSC_8162.jpg?or=0&q=60&crop=focalpoint&auto=format&fm=jpeg&fit=crop&fp-x=0.47&fp-y=0.63&w=476&h=339');
