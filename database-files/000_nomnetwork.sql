@@ -245,7 +245,7 @@ INSERT INTO ReviewTags (tagId, reviewId) VALUES (1, 1), (6, 2), (7, 2);
 INSERT INTO RestaurantTags (tagId, restId) VALUES (1,1), (2,1), (4,1), (7,1), (6,2), (4,3), (1,3);
 
 
-INSERT INTO Promotions (description, active,  name, restID)
+INSERT INTO Promotions (description, active, name, restID)
 VALUES ('Limited offer! Get two food items for the price of 1!', TRUE, 'Buy 2 for price of 1', 1),
       ('Come enjoy appetizers for under $5!', TRUE, 'Happy Hour', 2);
 
