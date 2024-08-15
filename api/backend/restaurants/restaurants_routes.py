@@ -137,6 +137,16 @@ def add_tag():
     db.get_db().commit()
     return {"result": 'You have successfully added a tag to the restaurant!'}
 
+# tags DELETE route to delete a tag 
+@restaurants.route('/restaurants/tags/<restId>/<tagId>', methods=['DELETE'])
+def delete_tag(restId, tagId):  
+    current_app.logger.info('restaurant_routes.py: DELETE /tags/<restId>/<tagId>')
+
+    cursor = db.get_db().cursor()
+    cursor.execute("DELETE FROM RestaurantTags WHERE restId = {0} AND tagId = {1}".format(restId, tagId))
+    db.get_db().commit()
+
+    return 'Tag removed'
 # # Get all restaurants from the DB
 # @restaurants.route('/restaurants', methods=['GET'])
 # def get_restaurants():
