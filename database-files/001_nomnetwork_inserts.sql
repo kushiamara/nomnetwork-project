@@ -2,7 +2,6 @@ use nomnetwork;
 -- Insert statements to add mockaroo data to each table
 
 -- Users
-INSERT INTO Users(userId,username,firstName,lastName,email,streetAddress,city,state,zipcode,dob,createdAt,updatedAt) VALUES (4,'gvaugham3','Geoff','Vaugham','gvaugham3@google.it','9 Hollow Ridge Park','Boston','MA',02109,'2005-02-15','2014-06-10 15:53:58','2022-01-23 09:28:48');
 INSERT INTO Users(userId,username,firstName,lastName,email,streetAddress,city,state,zipcode,dob,createdAt,updatedAt) VALUES (5,'sdeye4','Sara-ann','D''eye','sdeye4@sourceforge.net','9 Kennedy Parkway','Watertown','MA',02472,'2009-02-14','2018-12-21 04:23:31','2022-08-04 12:43:25');
 INSERT INTO Users(userId,username,firstName,lastName,email,streetAddress,city,state,zipcode,dob,createdAt,updatedAt) VALUES (6,'awallenger5','Adrienne','Wallenger','awallenger5@technorati.com','73524 Burning Wood Place','Newton','MA',02162,'2005-10-07','2014-03-12 18:02:13','2021-08-07 10:20:31');
 INSERT INTO Users(userId,username,firstName,lastName,email,streetAddress,city,state,zipcode,dob,createdAt,updatedAt) VALUES (7,'lmcilwraith6','Lyndsie','McIlwraith','lmcilwraith6@a8.net','14 Ryan Point','Boston','MA',02216,'2011-03-16','2015-03-07 13:44:30','2021-10-27 14:49:33');
