@@ -199,9 +199,10 @@ CREATE TABLE IF NOT EXISTS Promotions (
 
 -- Inserting Sample Data
 INSERT INTO Users (username, firstName, lastName, email, streetAddress, city, state, zipcode, dob)
-VALUES ('henryButler','Henry', 'Butler', 'henry@butler.com', '123 Park Dr', 'Brooklyn', 'NY', '11238', '2004-05-03'),
+VALUES ('emilyThompson','Emily', 'Thompson', 'ethompson@gmail.com', '7 Speare Pl', 'Boston', 'MA', '02115', '2003-08-03'),
    ('janeDoe', 'Jane', 'Doe', 'janedoe@gmail.com', '7 Main St', 'Denver', 'CO', '72643', '1987-06-12'),
-   ('thePresident', 'Joe', 'Biden', 'joeBiden@whitehouse.gov', '1800 Pennsylvania Ave', 'Washington', 'DC', '37188', '1942-11-20');
+   ('thePresident', 'Joe', 'Biden', 'joeBiden@whitehouse.gov', '1800 Pennsylvania Ave', 'Washington', 'DC', '37188', '1942-11-20'),
+   ('henryButler','Henry', 'Butler', 'henry@butler.com', '123 Park Dr', 'Brooklyn', 'NY', '11238', '2004-05-03');
 
 
 INSERT INTO Followers (followerId, followeeId) VALUES (1, 3), (2,3), (3, 1), (1,2);
@@ -238,8 +239,8 @@ VALUES (4.2, 'great food! really nice atmosphere and service.', 2, 1),
 
 
 INSERT INTO ReviewPhotos (reviewId, photo)
-VALUES (2, 'https://www.google.com/imgres?q=biden%20falling%20down%20stairs&imgurl=https%3A%2F%2Fs.abcnews.com%2Fimages%2FPolitics%2Fbiden-stumble-03-ht-jt-210319_1616181267869_hpMain_2_16x9_1600.jpg&imgrefurl=https%3A%2F%2Fabcnews.go.com%2FPolitics%2Fbiden-fine-tripping-times-jogging-steps-air-force%2Fstory%3Fid%3D76561006&docid=J2IeWSq45PD2cM&tbnid=JcA4mBYU2knQBM&vet=12ahUKEwi82ueEpuaHAxWBl4kEHUp0OXIQM3oECBgQAA..i&w=1600&h=900&hcb=2&ved=2ahUKEwi82ueEpuaHAxWBl4kEHUp0OXIQM3oECBgQAA'),
-      (1, 'https://www.google.com/url?sa=i&url=https%3A%2F%2Forders.co%2Fblog%2Fitalian-restaurant-design%2F&psig=AOvVaw3Gb1nN_BE_JpZfXvJcemC8&ust=1723237754104000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLDagYen5ocDFQAAAAAdAAAAABAE');
+VALUES (2, 'https://s.abcnews.com/images/Politics/biden-stumble-03-ht-jt-210319_1616181267869_hpMain_2_16x9_1600.jpg'),
+      (1, 'https://www.allrecipes.com/thmb/mvO1mRRH1zTz1SvbwBCTz78CRJI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/67700_RichPastaforthePoorKitchen_ddmfs_4x3_2284-220302ec8328442096df370dede357d7.jpg');
 
 
 INSERT INTO ReviewViews (reviewId, viewerId) VALUES (2, 1), (2, 2), (3, 3);
@@ -261,4 +262,3 @@ INSERT INTO RestaurantTags (tagId, restId) VALUES (1,1), (2,1), (4,1), (7,1), (6
 INSERT INTO Promotions (description, active,  name, restID)
 VALUES ('Limited offer! Get two food items for the price of 1!', TRUE, 'Buy 2 for price of 1', 1),
       ('Come enjoy appetizers for under $5!', TRUE, 'Happy Hour', 2);
-

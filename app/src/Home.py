@@ -48,7 +48,7 @@ if st.button("Act as Tom Anderson, a Data Analyst",
     # when user clicks the button, they are now considered authenticated
     st.session_state['authenticated'] = True
     # we set the role of the current user
-    st.session_state['role'] = 'pol_strat_advisor'
+    st.session_state['role'] = 'data_analyst'
     # we add the first name of the user (so it can be displayed on 
     # subsequent pages). 
     st.session_state['first_name'] = 'Tom'
@@ -61,18 +61,16 @@ if st.button('Act as Emily Thompson, a Diner',
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'usaid_worker'
+    st.session_state['role'] = 'diner'
     st.session_state['first_name'] = 'Emily'
-    logger.info("Logging in as Diner Persona")
-    st.switch_page('pages/10_USAID_Worker_Home.py')
+    st.switch_page('pages/10_Diner_Home.py')
 
 if st.button('Act as Marco Fontenot, a Restaurant Owner', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'administrator'
-    st.session_state['first_name'] = 'Marco'
-    logger.info("Logging in as Restaurant Owner Persona")
+    st.session_state['first_name'] = 'SysAdmin'
     st.switch_page('pages/20_Admin_Home.py')
 
 

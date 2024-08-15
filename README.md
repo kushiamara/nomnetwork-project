@@ -1,52 +1,39 @@
-# Summer 2024 CS 3200 Project Nomnetwork
+# NomNetwork App
 
-## About
+## Meet the Design Team
+Danielle Williams
+Kushi Amara
+April Zhao
+Henry Butler
+Zhiyan Yao
 
-This example project explores some features of Streamlit & Flask to build a comprehensive web app for your project.  You won't necessarily have to use all of the features in this example in your course project 
-
-## Current Project Components
-
-Currently, there are three major components:
-- Streamlit App (in the `./app` directory)
-- Flask REST api (in the `./api` directory)
-- MySQL setup files (in the `./database-files` directory)
-
-## Getting Started for Personal Exploration
-1. Clone the repo to your computer. 
-1. Set up the `.env` file in the `api` folder based on the `.env.template` file.
-1. Start the docker containers. 
-
-## Getting Started For Team Project
-1. Each team member should make a GitHub account if you don't already have one.  This should be for the public GitHub, not Khoury's enterprise server. 
-1. One team member should fork this repository. They will be the repo owner. 
-1. Add your team members as Collaborators on the repository.  You can find Collaborators under the Settings tab in the repository.
-1. Each team member needs to accept the invitation to collaborate
-1. Each team member (including the repo owner) needs to clone the repository to their laptops. 
-
-## Handling User Role Access and Control
-
-In most applications, when a user logs in, they assume a particular role.  For instance, when one logs in to a stock price prediction app, they may be a single investor, a portfolio manager, or a corporate executive (of a publicly traded company).  Each of those *roles* will likely present some similar features as well as some different features when compared to the other roles. So, how do you accomplish this in Streamlit?  This is sometimes called Role-based Access Control, or **RBAC** for short. 
-
-The code in this project demonstrates how to implement a simple RBAC system in Streamlit but without actually using user authentication (usernames and passwords).  The Streamlit pages from the original template repo are split up among 3 roles - Political Strategist, USAID Worker, and a System Administrator role (this is used for any sort of system tasks such as re-training ML model, etc.). It also demonstrates how to deploy an ML model. 
-
-Wrapping your head around this will take a little time and exploration of this code base.  Some highlights are below. 
-
-### Getting Started with the RBAC 
-1. We need to turn off the standard panel of links on the left side of the Streamlit app. This is done through the `app/src/.streamlit/config.toml` file.  So check that out. We are turning it off so we can control directly what links are shown. 
-1. Then I created a new python module in `app/src/modules/nav.py`.  When you look at the file, you will se that there are functions for basically each page of the application. The `st.sidebar.page_link(...)` adds a single link to the sidebar. We have a separate function for each page so that we can organize the links/pages by role. 
-1. Next, check out the `app/src/Home.py` file. Notice that there are 3 buttons added to the page and when one is clicked, it redirects via `st.switch_page(...)` to that Roles Home page in `app/src/pages`.  But before the redirect, I set a few different variables in the Streamlit `session_state` object to track role, first name of the user, and that the user is now authenticated.  
-1. Notice near the top of `app/src/Home.py` and all other pages, there is a call to `SideBarLinks(...)` from the `app/src/nav.py` module.  This is the function that will use the role set in `session_state` to determine what links to show the user in the sidebar. 
-1. The pages are organized by Role.  Pages that start with a `0` are related to the *Political Strategist* role.  Pages that start with a `1` are related to the *USAID worker* role.  And, pages that start with a `2` are related to The *System Administrator* role. 
+## Video Explanation of App and its Application Presented By Design Team
 
 
-## Deploying An ML Model (Totally Optional for CS3200 Project)
+## About the App
+Our app merges the visual excitement of Instagram with the detailed insights of Yelp. Users get to capture and share their food experiences with their friends and followers through posts while also exploring and discovering restaurants tailored to their preferences. This will be done by allowing users to share their culinary adventures but also tag the restaurants they eat at with categories such as the type of food, price range, ambiance, performances of live-music, outdoor seating, or one of the many other possible identifiers. This tagging system will allow other users to have a more streamlined and customized search for dining, especially in cities like Boston which is home to approximately 4000 restaurants. Restaurant profiles on the app allow restaurant managers to create  targeted promotions and real-time engagement, creating a dynamic platform for food lovers and businesses alike. 
 
-*Note*: This project only contains the infrastructure for a hypothetical ML model. 
+This is not just a review app—it's a blend of social sharing and discovery to transform how people find and enjoy their dining experiences.
 
-1. Build, train, and test your ML model in a Jupyter Notebook. 
-1. Once you're happy with the model's performance, convert your Jupyter Notebook code for the ML model to a pure python script.  You can include the `training` and `testing` functionality as well as the `prediction` functionality.  You may or may not need to include data cleaning, though. 
-1. Check out the  `api/backend/ml_models` module.  In this folder, I've put a sample (read *fake*) ML model in `model01.py`.  The `predict` function will be called by the Flask REST API to perform '*real-time*' prediction based on model parameter values that are stored in the database.  **Important**: you would never want to hard code the model parameter weights directly in the prediction function.  tl;dr - take some time to look over the code in `model01.py`.  
-1. The prediction route for the REST API is in `api/backend/customers/customer_routes.py`. Basically, it accepts two URL parameters and passes them to the `prediction` function in the `ml_models` module. The `prediction` route/function packages up the value(s) it receives from the model's `predict` function and send its back to Streamlit as JSON. 
-1. Back in streamlit, check out `app/src/pages/11_Prediction.py`.  Here, I create two numeric input fields.  When the button is pressed, it makes a request to the REST API URL `/c/prediction/.../...` function and passes the values from the two inputs as URL parameters.  It gets back the results from the route and displays them. Nothing fancy here. 
+## Personas the App is Designed For 
 
- 
+### Data Analyst
+#### Possible User Stories:
+1. As a data analyst for NomNetwork, I need to be able to determine what restaurants and features are the most popular so that I can send this data to restaurants such that they can make decisions with greater information.
+2. As a data analyst for NomNetwork, I need to be able to retrieve data on customer behavior and interaction with the app so that the software development team can improve user experience and more users will join the app.
+3. As a data analyst for NomNetwork, I need to be able to analyze customer demographics so that I can build new features that are based on those demographics that are beneficial to both diners and restaurants.
+
+### Diner
+#### Possible User Stories:
+1. As a diner, I need to be able to find restaurants with my desired qualities easily so that I can discover new local restaurants that accurately suit my dining preferences without wasting my time or money.
+2. As a diner, I need to be able to post pictures and write reviews about my restaurant experiences somewhere so that I can share all of my experiences.
+3. As a diner, I need to be able to see my friends’ dining experiences so that I can stay updated about what/where my friends are eating and feel connected to them despite the distance.
+
+### Restaurant Owner
+#### Possible User Stories:
+1. As a restaurant manager, I need to be able to make changes to my menu so that potential customers have the most up-to-date information about items and prices.
+2. As a restaurant manager, I need to be able to make potential customers aware of my restaurant's discernible and unique features so that those potential customers want to come visit my restaurant more than other competitors.
+3. As a restaurant manager, I need to be able to know about my customer’s dining experiences and their opinions of the food we serve so that I can use their feedback to improve the restaurant, resulting in more customers and revenue.
+4. As a restaurant manager, I need to be able to create and then update my promotions so that users remain engaged and can see the current best deals for my restaurant.
+
+## How to Start the Docker Containers
