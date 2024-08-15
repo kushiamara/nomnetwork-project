@@ -70,8 +70,8 @@ if st.button('Act as Marco Fontenot, a Restaurant Owner',
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'administrator'
-    st.session_state['first_name'] = 'SysAdmin'
-    st.switch_page('pages/20_Admin_Home.py')
+    st.session_state['first_name'] = 'Marco'
+    st.switch_page('pages/20_Restaurant_Home.py')
 
 
 

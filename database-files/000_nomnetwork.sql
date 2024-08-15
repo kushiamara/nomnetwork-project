@@ -106,21 +106,12 @@ CREATE TABLE IF NOT EXISTS Reviews (
  text TEXT,
  authorId INTEGER,
  restId INTEGER,
+ photo VARCHAR(2000),
  timePosted DATETIME DEFAULT CURRENT_TIMESTAMP,
  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
                    ON UPDATE CURRENT_TIMESTAMP,
  FOREIGN KEY (authorId) REFERENCES Users(userId) ON UPDATE CASCADE ON DELETE SET NULL,
  FOREIGN KEY (restId) REFERENCES Restaurants(restId) ON UPDATE CASCADE
-);
-
-
-
-
-CREATE TABLE IF NOT EXISTS ReviewPhotos (
- photoId INTEGER PRIMARY KEY AUTO_INCREMENT,
- reviewId INTEGER NOT NULL,
- photo VARCHAR(2000),
- FOREIGN KEY (reviewId) REFERENCES Reviews(reviewId) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
@@ -232,15 +223,10 @@ VALUES ('Margherita Pizza',1, 16.00, 800, 'https://images.app.goo.gl/GNh3CAewYvQ
       ('Steak Quesadillas', 2, 34, 480, 'https://images.app.goo.gl/NECD4rauM5pKiPp6A');
 
 
-INSERT INTO Reviews (rating, text, authorId, restId)
-VALUES (4.2, 'great food! really nice atmosphere and service.', 2, 1),
-     (5, 'Best meal I ever had', 3, 2),
-     (2.3, 'Pretty mid tbh', 2, 3);
-
-
-INSERT INTO ReviewPhotos (reviewId, photo)
-VALUES (2, 'https://s.abcnews.com/images/Politics/biden-stumble-03-ht-jt-210319_1616181267869_hpMain_2_16x9_1600.jpg'),
-      (1, 'https://www.allrecipes.com/thmb/mvO1mRRH1zTz1SvbwBCTz78CRJI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/67700_RichPastaforthePoorKitchen_ddmfs_4x3_2284-220302ec8328442096df370dede357d7.jpg');
+INSERT INTO Reviews (rating, text, authorId, restId, photo)
+VALUES (4.2, 'great food! really nice atmosphere and service.', 2, 1, 'https://www.allrecipes.com/thmb/mvO1mRRH1zTz1SvbwBCTz78CRJI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/67700_RichPastaforthePoorKitchen_ddmfs_4x3_2284-220302ec8328442096df370dede357d7.jpg'),
+     (5, 'Best meal I ever had', 3, 2, 'https://s.abcnews.com/images/Politics/biden-stumble-03-ht-jt-210319_1616181267869_hpMain_2_16x9_1600.jpg') ,
+     (2.3, 'Pretty mid tbh', 2, 3, 'https://bostons.imgix.net/DSC_8162.jpg?or=0&q=60&crop=focalpoint&auto=format&fm=jpeg&fit=crop&fp-x=0.47&fp-y=0.63&w=476&h=339');
 
 
 INSERT INTO ReviewViews (reviewId, viewerId) VALUES (2, 1), (2, 2), (3, 3);
@@ -262,3 +248,4 @@ INSERT INTO RestaurantTags (tagId, restId) VALUES (1,1), (2,1), (4,1), (7,1), (6
 INSERT INTO Promotions (description, active,  name, restID)
 VALUES ('Limited offer! Get two food items for the price of 1!', TRUE, 'Buy 2 for price of 1', 1),
       ('Come enjoy appetizers for under $5!', TRUE, 'Happy Hour', 2);
+
