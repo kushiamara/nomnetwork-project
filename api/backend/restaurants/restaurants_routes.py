@@ -14,7 +14,7 @@ def get_menu_items(restId):
     current_app.logger.info('restaurant_routes.py: GET /menuitems/<restId>')
 
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT itemName, restId, price, calories, photo FROM MenuItems WHERE restId = {0};'.format(restId))
+    cursor.execute('SELECT itemName, price, calories, photo FROM MenuItems WHERE restId = {0};'.format(restId))
     # row_headers = [x[0] for x in cursor.description]
     # json_data = []
     theData = cursor.fetchall()
@@ -147,6 +147,46 @@ def delete_tag(restId, tagId):
     db.get_db().commit()
 
     return 'Tag removed'
+
+# promotions GET route to return all promotions
+@restaurants.route('/restaurants/promotions/<restId>', methods=['GET'])
+def get_promos(restId):
+    current_app.logger.info('restaurant_routes.py: GET /promotions/<restId>')
+
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT name, description, active FROM Promotions WHERE restId = {0};'.format(restId))
+    # row_headers = [x[0] for x in cursor.description]
+    # json_data = []
+    theData = cursor.fetchall()
+    # for row in theData:
+    #     json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# promotions POST route to add a promotion
+@restaurants.route('/restaurants/promotions', methods=['POST'])
+def add_promo():
+    # collecting data from the request object 
+    the_data = request.json
+    # return the_data
+    current_app.logger.info(the_data)
+    # extracting the variable
+    name = the_data['name']
+    desc = the_data['description']
+    restId = the_data['restId']
+    active = the_data['active']
+    # return {"query":"test"}
+    # Constructing the query
+    sql = '''INSERT into Promotions (name, description, restId, active) values ('{0}', '{1}', {2}, {3})'''.format(name, desc, restId, active)
+    current_app.logger.info(sql)
+    # return {"query":sql}
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(sql)
+    db.get_db().commit()
+    return {"result": 'You have successfully added a new promotion!'}
 # # Get all restaurants from the DB
 # @restaurants.route('/restaurants', methods=['GET'])
 # def get_restaurants():
