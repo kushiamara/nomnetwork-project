@@ -15,10 +15,11 @@ data_analyst = Blueprint('data_analyst', __name__)
 def get_rest():
     current_app.logger.info('data_analyst_routes.py: GET /data_analyst/rest')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT restName, AVG(rating) as AverageRating \
-        FROM Restaurant r JOIN Reviews re ON r.restId=re.restId  \
+    cursor.execute('SELECT restName, AVG(rating) as AverageRating, COUNT(reviewId) as NumReviews \
+        FROM Restaurants r JOIN Reviews re ON r.restId=re.restId  \
         GROUP BY restName \
-        ORDER BY AverageRating desc ')
+        ORDER BY AverageRating desc, NumReviews desc \
+        LIMIT 20 ')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
