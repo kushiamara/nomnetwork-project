@@ -8,7 +8,7 @@ from backend.ml_models.model01 import predict
 
 restaurants = Blueprint('restaurants', __name__)
 
-@restaurants.route('/menuitems', methods=['GET'])
+@restaurants.route('/restaurants/menuitems', methods=['GET'])
 def get_menu_items():
     current_app.logger.info('restaurant_routes.py: GET /menuitems')
 
@@ -58,7 +58,7 @@ def get_restaurants():
     return the_response
 
 # Update a menu item
-@restaurants.route('/restaurants', methods=['PUT'])
+@restaurants.route('/restaurants/<newItem>', methods=['PUT'])
 def update_menu_item():
     current_app.logger.info('PUT /restaurants route')
     menu_info = request.json
