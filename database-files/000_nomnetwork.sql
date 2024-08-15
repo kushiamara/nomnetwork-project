@@ -106,21 +106,12 @@ CREATE TABLE IF NOT EXISTS Reviews (
  text TEXT,
  authorId INTEGER,
  restId INTEGER,
+ photo VARCHAR(2000),
  timePosted DATETIME DEFAULT CURRENT_TIMESTAMP,
  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
                    ON UPDATE CURRENT_TIMESTAMP,
  FOREIGN KEY (authorId) REFERENCES Users(userId) ON UPDATE CASCADE ON DELETE SET NULL,
  FOREIGN KEY (restId) REFERENCES Restaurants(restId) ON UPDATE CASCADE
-);
-
-
-
-
-CREATE TABLE IF NOT EXISTS ReviewPhotos (
- photoId INTEGER PRIMARY KEY AUTO_INCREMENT,
- reviewId INTEGER NOT NULL,
- photo VARCHAR(2000),
- FOREIGN KEY (reviewId) REFERENCES Reviews(reviewId) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
@@ -236,11 +227,6 @@ INSERT INTO Reviews (rating, text, authorId, restId)
 VALUES (4.2, 'great food! really nice atmosphere and service.', 2, 1),
      (5, 'Best meal I ever had', 3, 2),
      (2.3, 'Pretty mid tbh', 2, 3);
-
-
-INSERT INTO ReviewPhotos (reviewId, photo)
-VALUES (2, 'https://s.abcnews.com/images/Politics/biden-stumble-03-ht-jt-210319_1616181267869_hpMain_2_16x9_1600.jpg'),
-      (1, 'https://www.allrecipes.com/thmb/mvO1mRRH1zTz1SvbwBCTz78CRJI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/67700_RichPastaforthePoorKitchen_ddmfs_4x3_2284-220302ec8328442096df370dede357d7.jpg');
 
 
 INSERT INTO ReviewViews (reviewId, viewerId) VALUES (2, 1), (2, 2), (3, 3);
