@@ -68,26 +68,21 @@ def get_menu_item(restId, itemName):
 
 # menuitem PUT route to update a menu item
 @restaurants.route('/restaurants/menuitem/<restId>/<itemName>', methods=['PUT'])
-def update_menu_item():
+def update_menu_item(restId, itemName):
     # collecting data from the request object 
     the_data = request.json
     # return the_data
     current_app.logger.info(the_data)
     # extracting the variable
-    itemName = the_data['itemName']
+    name = the_data['itemName']
     price = the_data['price']
     calories = the_data['calories']
     photo = the_data['photo']
-    # return {"query":"test"}
-    # Constructing the query
-    sql = '''INSERT into MenuItems (itemName, price, calories, photo) values ('{0}', {1}, {2}, '{4}')'''.format(itemName, price, calories, photo)
-    current_app.logger.info(sql)
-    # return {"query":sql}
-    # executing and committing the insert statement 
+
     cursor = db.get_db().cursor()
-    cursor.execute(sql)
+    cursor.execute("UPDATE MenuItems SET itemName = '{0}', price = {1}, calories = {2}, photo = '{3}' WHERE restId = {4} AND LCASE(REPLACE(itemName, ' ','')) = '{5}'".format(name, price, calories, photo, restId, str(itemName).casefold()))
     db.get_db().commit()
-    return {"result": 'You have successfully added a menu item!'}
+    return 'Item updated!'
 
 # tags GET method to return all the restaurants tags
 @restaurants.route('/restaurants/tags/<restId>', methods=['GET'])
@@ -110,37 +105,37 @@ def get_tags(restId):
     return the_response
 
 
-# Get all restaurants from the DB
-@restaurants.route('/restaurants', methods=['GET'])
-def get_restaurants():
-    current_app.logger.info('restaurant_routes.py: GET /restaurants')
-    cursor = db.get_db().cursor()
-    cursor.execute('SELECT itemName, restId, price, calories, photo FROM MenuItems WHERE restId = 1;')
-    # row_headers = [x[0] for x in cursor.description]
-    # json_data = []
-    theData = cursor.fetchall()
-    # for row in theData:
-    #     json_data.append(dict(zip(row_headers, row)))
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
+# # Get all restaurants from the DB
+# @restaurants.route('/restaurants', methods=['GET'])
+# def get_restaurants():
+#     current_app.logger.info('restaurant_routes.py: GET /restaurants')
+#     cursor = db.get_db().cursor()
+#     cursor.execute('SELECT itemName, restId, price, calories, photo FROM MenuItems WHERE restId = 1;')
+#     # row_headers = [x[0] for x in cursor.description]
+#     # json_data = []
+#     theData = cursor.fetchall()
+#     # for row in theData:
+#     #     json_data.append(dict(zip(row_headers, row)))
+#     the_response = make_response(theData)
+#     the_response.status_code = 200
+#     the_response.mimetype = 'application/json'
+#     return the_response
 
-# Update a menu item
-@restaurants.route('/restaurants/<newItem>', methods=['PUT'])
-def update_menu_item():
-    current_app.logger.info('PUT /restaurants route')
-    menu_info = request.json
-    # current_app.logger.info(cust_info)
-    restId = menu_info['restId']
-    itemName = menu_info['itemName']
-    price = menu_info['price']
-    calories = menu_info['calories']
+# # Update a menu item
+# @restaurants.route('/restaurants/<newItem>', methods=['PUT'])
+# def update_menu_item():
+#     current_app.logger.info('PUT /restaurants route')
+#     menu_info = request.json
+#     # current_app.logger.info(cust_info)
+#     restId = menu_info['restId']
+#     itemName = menu_info['itemName']
+#     price = menu_info['price']
+#     calories = menu_info['calories']
 
-    query = 'UPDATE MenuItems SET price = %s, calories = %s WHERE restId = %s and itemName = %s'
-    data = (restId, itemName, price, calories)
-    cursor = db.get_db().cursor()
-    r = cursor.execute(query, data)
-    db.get_db().commit()
-    return 'Menu item successfully updated!'
+#     query = 'UPDATE MenuItems SET price = %s, calories = %s WHERE restId = %s and itemName = %s'
+#     data = (restId, itemName, price, calories)
+#     cursor = db.get_db().cursor()
+#     r = cursor.execute(query, data)
+#     db.get_db().commit()
+#     return 'Menu item successfully updated!'
     
