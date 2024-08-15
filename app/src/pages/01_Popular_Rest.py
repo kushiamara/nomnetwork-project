@@ -12,6 +12,9 @@ SideBarLinks()
 st.header('NomNetwork Popular Restaurants')
 
 # You can access the session state to make a more customized/personalized app experience
-st.write(f"### Hi, {st.session_state['first_name']}. Here is a list of the restaurants ranked by ratings and number of reviews.")
+st.write(f"### Hi, {st.session_state['first_name']}. " )
+st.write(f"#### Here is a list of the 20 most popular restaurants ranked by ratings and then the number of reviews.")
 
 data = requests.get('http://api:4000/da/data_analyst/rest').json()
+
+st.dataframe(data)
