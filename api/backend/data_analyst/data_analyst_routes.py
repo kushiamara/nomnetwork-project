@@ -9,11 +9,26 @@ from backend.ml_models.model01 import predict
 data_analyst = Blueprint('data_analyst', __name__)
 
 @data_analyst.route('/prediction/<var01>/<var02>', methods=['GET'])
-    
+
+# [Tom-1] Return each resturuant ranked by rating and number of reviews 
+@data_analyst.route('/data_analyst/rest', methods=['GET'])
+def get_rest():
+    current_app.logger.info('data_analyst_routes.py: GET /data_analyst/rest')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT restName, AVG(rating) as AverageRating \
+        FROM Restaurant r JOIN Reviews re ON r.restId=re.restId  \
+        GROUP BY restName \
+        ORDER BY AverageRating desc ')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response 
+
 # [Tom-1] Return each tag and the number of times they were used ordered by popularity
-@data_analyst.route('/data_analyst', methods=['GET'])
+@data_analyst.route('/data_analyst/tags', methods=['GET'])
 def get_tags():
-    current_app.logger.info('data_analyst_routes.py: GET /data_analyst')
+    current_app.logger.info('data_analyst_routes.py: GET /data_analyst/tags')
     cursor = db.get_db().cursor()
     cursor.execute('SELECT tagName, COUNT(tagName) as NumTimesUsed  \
         FROM RestaurantTags rt JOIN Tags t ON rt.tagId = t.tagId \
@@ -26,9 +41,9 @@ def get_tags():
     return the_response
 
 # [Tom-2] Return the number of views and comments of each review
-@data_analyst.route('/data_analyst', methods=['GET'])
+@data_analyst.route('/data_analyst/behavior', methods=['GET'])
 def get_reviews():
-    current_app.logger.info('data_analyst_routes.py: GET /data_analyst')
+    current_app.logger.info('data_analyst_routes.py: GET /data_analyst/behavior')
     cursor = db.get_db().cursor()
     cursor.execute('SELECT r.reviewId, COUNT(rv.timeViewed) AS numberOfviews, COUNT(c.commentId) AS numberOfComments \
         FROM Reviews r LEFT JOIN ReviewViews rv on r.reviewId = rv.reviewId LEFT JOIN Comments c on r.reviewId = c.reviewID \
@@ -40,9 +55,9 @@ def get_reviews():
     return the_response
 
     # [Tom-3] Return the customer demographic information for each restaurant
-@data_analyst.route('/data_analyst', methods=['GET'])
+@data_analyst.route('/data_analyst/users', methods=['GET'])
 def get_users():
-    current_app.logger.info('data_analyst_routes.py: GET /data_analyst')
+    current_app.logger.info('data_analyst_routes.py: GET /data_analyst/users')
     cursor = db.get_db().cursor()
     cursor.execute('SELECT restName as RestaurantName, ROUND(AVG(DATEDIFF(CURRENT_DATE, u.dob) / 365)) as AvgDinerAge, \
         SUM(CASE WHEN r.city != u.city THEN 1 ELSE 0 END) as numNotLocalDiners \

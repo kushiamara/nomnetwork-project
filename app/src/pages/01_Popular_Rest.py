@@ -13,10 +13,10 @@ from modules.nav import SideBarLinks
 SideBarLinks()
 
 # set the header of the page
-st.header('World Bank Data')
+st.header('NomNetwork Popular Restaurants')
 
 # You can access the session state to make a more customized/personalized app experience
-st.write(f"### Hi, {st.session_state['first_name']}.")
+st.write(f"### Hi, {st.session_state['first_name']}. Here is a list of the restaurants ranked by ratings and number of reviews.")
 
 # get the countries from the world bank data
 with st.echo(code_location='above'):
