@@ -8,7 +8,7 @@ from backend.ml_models.model01 import predict
 
 restaurants = Blueprint('restaurants', __name__)
 
-@restaurants.route('/menuitems', methods=['GET'])
+@restaurants.route('/restaurants/menuitems', methods=['GET'])
 def get_menu_items():
     current_app.logger.info('restaurant_routes.py: GET /menuitems')
 
@@ -24,12 +24,12 @@ def get_menu_items():
     the_response.mimetype = 'application/json'
     return the_response
 
-@restaurants.route('/menuitem/<itemName>', methods=['GET'])
+@restaurants.route('/restaurants/menuitem/<itemName>', methods=['GET'])
 def get_menu_item(itemName):
     current_app.logger.info('restaurant_routes.py: GET /menuitems/<itemName>')
 
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT itemName, restId, price, calories, photo FROM MenuItems WHERE restId = 1 AND LCASE(REPLACE(itemName, ' ','')) = {0}'.format(itemName))
+    cursor.execute("SELECT itemName, restId, price, calories, photo FROM MenuItems WHERE restId = 1 AND LCASE(REPLACE(itemName, ' ','')) = '{0}'".format(str(itemName).casefold()))
     # row_headers = [x[0] for x in cursor.description]
     # json_data = []
     theData = cursor.fetchall()
