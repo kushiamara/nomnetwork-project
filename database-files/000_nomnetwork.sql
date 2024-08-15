@@ -199,9 +199,10 @@ CREATE TABLE IF NOT EXISTS Promotions (
 
 -- Inserting Sample Data
 INSERT INTO Users (username, firstName, lastName, email, streetAddress, city, state, zipcode, dob)
-VALUES ('henryButler','Henry', 'Butler', 'henry@butler.com', '123 Park Dr', 'Brooklyn', 'NY', '11238', '2004-05-03'),
+VALUES ('emilyThompson','Emily', 'Thompson', 'ethompson@gmail.com', '7 Speare Pl', 'Boston', 'MA', '02115', '2003-08-03'),
    ('janeDoe', 'Jane', 'Doe', 'janedoe@gmail.com', '7 Main St', 'Denver', 'CO', '72643', '1987-06-12'),
-   ('thePresident', 'Joe', 'Biden', 'joeBiden@whitehouse.gov', '1800 Pennsylvania Ave', 'Washington', 'DC', '37188', '1942-11-20');
+   ('thePresident', 'Joe', 'Biden', 'joeBiden@whitehouse.gov', '1800 Pennsylvania Ave', 'Washington', 'DC', '37188', '1942-11-20'),
+   ('henryButler','Henry', 'Butler', 'henry@butler.com', '123 Park Dr', 'Brooklyn', 'NY', '11238', '2004-05-03');
 
 
 INSERT INTO Followers (followerId, followeeId) VALUES (1, 3), (2,3), (3, 1), (1,2);
@@ -261,4 +262,3 @@ INSERT INTO RestaurantTags (tagId, restId) VALUES (1,1), (2,1), (4,1), (7,1), (6
 INSERT INTO Promotions (description, active,  name, restID)
 VALUES ('Limited offer! Get two food items for the price of 1!', TRUE, 'Buy 2 for price of 1', 1),
       ('Come enjoy appetizers for under $5!', TRUE, 'Happy Hour', 2);
-
