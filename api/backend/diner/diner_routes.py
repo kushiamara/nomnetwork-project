@@ -8,54 +8,6 @@ from backend.ml_models.model01 import predict
 
 diner = Blueprint('diner', __name__)
 
-# @diner.route('/prediction/<var01>/<var02>', methods=['GET'])
-# def predict_value(var01, var02):
-#     current_app.logger.info(f'var01 = {var01}')
-#     current_app.logger.info(f'var02 = {var02}')
-
-#     returnVal = predict(var01, var02)
-#     return_dict = {'result': returnVal}
-
-#     the_response = make_response(jsonify(return_dict))
-#     the_response.status_code = 200
-#     the_response.mimetype = 'application/json'
-#     return the_response
-
-
-# # Get all diners from the DB
-# @restaurants.route('/diner', methods=['GET'])
-# def get_restaurants():
-#     current_app.logger.info('diner_routes.py: GET /diner')
-#     cursor = db.get_db().cursor()
-#     cursor.execute('SELECT username FROM users;')
-#     # row_headers = [x[0] for x in cursor.description]
-#     # json_data = []
-#     theData = cursor.fetchall()
-#     # for row in theData:
-#     #     json_data.append(dict(zip(row_headers, row)))
-#     the_response = make_response(theData)
-#     the_response.status_code = 200
-#     the_response.mimetype = 'application/json'
-#     return the_response
-
-# # Update a menu item
-# @restaurants.route('/restaurants', methods=['PUT'])
-# def update_menu_item():
-#     current_app.logger.info('PUT /restaurants route')
-#     menu_info = request.json
-#     # current_app.logger.info(cust_info)
-#     restId = menu_info['restId']
-#     itemName = menu_info['itemName']
-#     price = menu_info['price']
-#     calories = menu_info['calories']
-
-#     query = 'UPDATE MenuItems SET price = %s, calories = %s WHERE restId = %s and itemName = %s'
-#     data = (restId, itemName, price, calories)
-#     cursor = db.get_db().cursor()
-#     r = cursor.execute(query, data)
-#     db.get_db().commit()
-#     return 'Menu item successfully updated!'
-
 # [Emily-3]
 # Get reviews for the people that the given userId follows
 @diner.route('/diner/<username>', methods=['GET'])
@@ -72,7 +24,8 @@ def get_reviews(username):
         JOIN Followers f ON me.userId = f.followerId
         JOIN Reviews r ON f.followeeId = r.authorId
         JOIN Users u ON r.authorId = u.userId
-        WHERE me.username = '{0}' '''.format(username)
+        WHERE me.username = '{0}' 
+        ORDER BY dayPosted desc'''.format(username)
     cursor.execute(sql)
     theData = cursor.fetchall()
     the_response = make_response(theData)
@@ -84,23 +37,18 @@ def get_reviews(username):
 # add a new review to the app
 @diner.route('/diner', methods=['POST'])
 def add_new_review():
-    
     # collecting data from the request object 
     the_data = request.json
-    # return the_data
     current_app.logger.info(the_data)
     # extracting the variable
     rating = the_data['rating']
-    # return rating
     text = the_data['text']
     authorId = the_data['authorId']
     restId = the_data['restId']
     photo = the_data['photo']
-    # return {"query":"test"}
     # Constructing the query
     sql = '''INSERT into Reviews (rating, text, authorId, restId, photo) values ({0}, '{1}', {2}, {3}, '{4}')'''.format(rating, text, authorId, restId, photo)
     current_app.logger.info(sql)
-    # return {"query":sql}
     # executing and committing the insert statement 
     cursor = db.get_db().cursor()
     cursor.execute(sql)
@@ -108,40 +56,28 @@ def add_new_review():
     return {"result": 'You have successfully added a review!'}
 
 
-
-
-# display all restaurant names
+# display all restaurant names to be displayed in post review dropdown
 @diner.route('/diner/restaurants', methods=['GET'])
 def show_restaurants():
     sql = '''SELECT DISTINCT restId as ID, restName as Name FROM Restaurants r'''
-    # return sql
     current_app.logger.info('GET /diner route')
     cursor = db.get_db().cursor()
     cursor.execute(sql)
-    # row_headers = [x[0] for x in cursor.description]
-    # json_data = []
     theData = cursor.fetchall()
-    # for row in theData:
-    #     json_data.append(dict(zip(row_headers, row)))
     the_response = make_response(theData)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
 
-# find the user's authorId
+# find the user's authorId to insert when posting a review
 @diner.route('/diner/author/<username>', methods=['GET'])
 def find_author(username):
     sql = '''SELECT userId FROM Users WHERE username = '{0}' '''.format(username)
-    # return sql
     current_app.logger.info('GET /diner route')
     cursor = db.get_db().cursor()
     cursor.execute(sql)
-    # row_headers = [x[0] for x in cursor.description]
-    # json_data = []
     theData = cursor.fetchall()
     theUser = theData[0]
-    # for row in theData:
-    #     json_data.append(dict(zip(row_headers, row)))
     the_response = make_response(theUser)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
@@ -149,32 +85,25 @@ def find_author(username):
 
 
 # [Emily-1]
-# find list of all tags
+# find list of all tags to display in the dropdown
 @diner.route('/diner/tags', methods=['GET'])
 def find_tags():
     sql = '''SELECT tagName, tagId FROM Tags'''
-    # return sql
     current_app.logger.info('GET /diner/tags route')
     cursor = db.get_db().cursor()
     cursor.execute(sql)
-    # row_headers = [x[0] for x in cursor.description]
-    # json_data = []
     theData = cursor.fetchall()
-    # for row in theData:
-    #     json_data.append(dict(zip(row_headers, row)))
     the_response = make_response(theData)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
 
-# search for restuareants
 # search for restaurants based on tags
 @diner.route('/diner/restaurants/search', methods=['GET'])
 def search_restaurants():
     # Retrieve the 'tags' query parameter
     tags = request.args.get('tags', default='', type=str)
     tags_length = len(tags.split(","))
-    # return {"len": tags_length}
     sql = '''SELECT DISTINCT
         restName as RestaurantName,
         websiteLink
@@ -184,15 +113,10 @@ def search_restaurants():
         WHERE rt.tagId in ({0})
         GROUP BY r.restName, r.websiteLink
         HAVING COUNT(DISTINCT t.tagName) = {1} '''.format(tags, tags_length)
-    # return sql
     current_app.logger.info('GET /diner route')
     cursor = db.get_db().cursor()
     cursor.execute(sql)
-    # row_headers = [x[0] for x in cursor.description]
-    # json_data = []
     theData = cursor.fetchall()
-    # for row in theData:
-    #     json_data.append(dict(zip(row_headers, row)))
     the_response = make_response(theData)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
