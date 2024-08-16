@@ -73,7 +73,7 @@ def get_reviews_high():
     the_response.mimetype = 'application/json'
     return the_response
 
-# [Tom-2.1.3] Return the reviews with the highest views and comments 
+# [Tom-2.1.3] Return the reviews with the highest views and lowest comments 
 @data_analyst.route('/data_analyst/behavior/low', methods=['GET'])
 def get_reviews_low():
     current_app.logger.info('data_analyst_routes.py: GET /data_analyst/behavior/low')
