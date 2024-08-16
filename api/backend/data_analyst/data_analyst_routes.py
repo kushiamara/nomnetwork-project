@@ -58,7 +58,7 @@ def get_reviews():
 
 # [Tom-2.1.2] Return the reviews with the highest views and comments 
 @data_analyst.route('/data_analyst/behavior/high', methods=['GET'])
-def get_reviews():
+def get_reviews_high():
     current_app.logger.info('data_analyst_routes.py: GET /data_analyst/behavior/high')
     cursor = db.get_db().cursor()
     cursor.execute('SELECT u.username, r.reviewId, COUNT(rv.timeViewed) AS NumberOfViews, COUNT(c.commentId) AS NumberOfComments \
@@ -74,7 +74,7 @@ def get_reviews():
 
 # [Tom-2.1.3] Return the reviews with the highest views and comments 
 @data_analyst.route('/data_analyst/behavior/low', methods=['GET'])
-def get_reviews():
+def get_reviews_low():
     current_app.logger.info('data_analyst_routes.py: GET /data_analyst/behavior/low')
     cursor = db.get_db().cursor()
     cursor.execute('SELECT u.username, r.reviewId, COUNT(rv.timeViewed) AS NumberOfViews, COUNT(c.commentId) AS NumberOfComments \
@@ -90,7 +90,7 @@ def get_reviews():
 
 # [Tom-2.2.1] Return the users with the most followers and the amount of reviews they have posted
 @data_analyst.route('/data_analyst/behavior/followers', methods=['GET'])
-def get_reviews():
+def get_followers():
     current_app.logger.info('data_analyst_routes.py: GET /data_analyst/behavior/followers')
     cursor = db.get_db().cursor()
     cursor.execute('SELECT u.username, COUNT(r.reviewId) as NumberOfReviews, COUNT(f.followerId) as NumberOfFollowers \

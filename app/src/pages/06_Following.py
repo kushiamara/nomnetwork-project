@@ -10,7 +10,7 @@ SideBarLinks()
 
 # set the header of the page
 st.header('NomNetwork Overview of User Behavior:')
-st.write(f"## Posting Reviews")
+st.write(f"## Following")
 st.write(' ')
 
 # You can access the session state to make a more customized/personalized app experience
