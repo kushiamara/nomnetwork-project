@@ -148,6 +148,26 @@ def delete_tag(restId, tagId):
 
     return 'Tag Removed'
 
+# reviews GET route to return reviews below a given rating
+@restaurants.route('/restaurants/reviews/<restId>/<rating>', methods=['GET'])
+def get_reviews_below(restId, rating):
+    current_app.logger.info('restaurant_routes.py: GET /reviews/<restId>/<itemName>')
+
+    cursor = db.get_db().cursor()
+    cursor.execute('''SELECT username, rating, text FROM Restaurants
+                        JOIN Reviews  ON Restaurants.restId = Reviews.restId
+                        JOIN Users ON Reviews.authorId = Users.userId
+                    WHERE rating < {0} AND Restaurants.restId = {1};'''.format(rating, restId))
+    # row_headers = [x[0] for x in cursor.description]
+    # json_data = []
+    theData = cursor.fetchall()
+    # for row in theData:
+    #     json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 # promotions GET route to return all promotions
 @restaurants.route('/restaurants/promotions/<restId>', methods=['GET'])
 def get_promos(restId):
