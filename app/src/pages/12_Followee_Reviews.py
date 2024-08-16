@@ -29,5 +29,5 @@ def url_to_image_html(url):
 # Apply the function to the 'photo' column
 df['photo'] = df['photo'].apply(url_to_image_html)
 
-# Display the DataFrame in Streamlit\
+# Display the DataFrame in Streamlit
 st.markdown(df.to_html(escape=False), unsafe_allow_html=True)

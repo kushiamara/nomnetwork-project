@@ -200,7 +200,7 @@ def get_promos(restId):
     current_app.logger.info('restaurant_routes.py: GET /promotions/<restId>')
 
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT name, description, active FROM Promotions WHERE restId = {0};'.format(restId))
+    cursor.execute('SELECT name, description, CASE WHEN active = 1 THEN "Yes" ELSE "No" END as activeStatus FROM Promotions WHERE restId = {0};'.format(restId))
     # row_headers = [x[0] for x in cursor.description]
     # json_data = []
     theData = cursor.fetchall()
@@ -265,7 +265,7 @@ def update_promotion(restId, name):
     active = the_data['active']
 
     cursor = db.get_db().cursor()
-    cursor.execute("UPDATE Promotions SET name = '{0}', description = '{1}', active = {2} WHERE restId = {3} AND LCASE(REPLACE(name, ' ','')) = '{4}'".format(new_name, desc, active, restId, str(name).casefold()))
+    cursor.execute("UPDATE Promotions SET name = '{0}', description = '{1}', active = {2} WHERE restId = {3} AND name = '{4}'".format(new_name, desc, active, restId, name))
     db.get_db().commit()
     return 'Promotion Updated!'
 

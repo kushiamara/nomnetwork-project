@@ -4,6 +4,7 @@ import streamlit as st
 from modules.nav import SideBarLinks
 import requests
 import pandas as pd
+import time
 
 st.set_page_config(layout = 'wide')
 
@@ -126,6 +127,9 @@ try:
                     response = requests.delete(delete_url)
                     response.raise_for_status()
                     st.success('Menu item deleted successfully!')
+                    time.sleep(1)
+                    st.switch_page('pages/21_View_Menu.py')
+                    
                 except requests.exceptions.RequestException as e:
                     st.error(f"An error occurred: {e}")
     else:

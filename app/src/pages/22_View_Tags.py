@@ -61,7 +61,7 @@ with st.form(key='add_tag_form'):
                 result = response.json()
                 st.success(result.get('result', 'Tag added successfully!'))
             except requests.exceptions.RequestException as e:
-                st.error(f"An error occurred while adding the tag: {e}")
+                st.error("This tag is already associated with your restaurant.")
 
 
 # Delete an Existing Tag
