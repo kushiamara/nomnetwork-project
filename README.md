@@ -8,7 +8,7 @@ Henry Butler \
 Zhiyan Yao 
 
 ## Video Explanation of App and its Application Presented By Design Team:
-[INSERT LINK HERE](https://drive.google.com/file/d/1t0IO2Yp30l-f6RPCpC0aByArSY5oe_bd/view?usp=sharing)
+[Click Here to Watch Video](https://drive.google.com/file/d/1t0IO2Yp30l-f6RPCpC0aByArSY5oe_bd/view?usp=sharing)
 
 ## How to Start the Docker Containers
 Ensure that the .env matches with the specifications below:
