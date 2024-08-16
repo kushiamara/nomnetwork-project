@@ -63,7 +63,7 @@ def get_reviews_high():
     current_app.logger.info('data_analyst_routes.py: GET /data_analyst/behavior/high')
     cursor = db.get_db().cursor()
     cursor.execute('SELECT u.username, r.reviewId, COUNT(rv.timeViewed) AS NumberOfViews, COUNT(c.commentId) AS NumberOfComments \
-        FROM Reviews r LEFT JOIN ReviewViews rv on r.reviewId = rv.reviewId LEFT JOIN Comments c on r.reviewId = c.reviewID LEFT JOIN Users u on u.userId=r.authorId\
+        FROM Reviews r  JOIN ReviewViews rv on r.reviewId = rv.reviewId  JOIN Comments c on r.reviewId = c.reviewID  JOIN Users u on u.userId=r.authorId\
         GROUP BY reviewId \
         ORDER BY NumberOfViews desc, NumberOfComments desc \
         LIMIT 15; ')
@@ -79,7 +79,7 @@ def get_reviews_low():
     current_app.logger.info('data_analyst_routes.py: GET /data_analyst/behavior/low')
     cursor = db.get_db().cursor()
     cursor.execute('SELECT u.username, r.reviewId, COUNT(rv.timeViewed) AS NumberOfViews, COUNT(c.commentId) AS NumberOfComments \
-        FROM Reviews r LEFT JOIN ReviewViews rv on r.reviewId = rv.reviewId LEFT JOIN Comments c on r.reviewId = c.reviewID JOIN Users u on u.userId=r.authorId\
+        FROM Reviews r  JOIN ReviewViews rv on r.reviewId = rv.reviewId  JOIN Comments c on r.reviewId = c.reviewID JOIN Users u on u.userId=r.authorId\
         GROUP BY reviewId \
         ORDER BY NumberOfViews desc, NumberOfComments asc \
         LIMIT 15; ')
