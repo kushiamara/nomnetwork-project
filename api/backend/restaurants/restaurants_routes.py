@@ -187,6 +187,41 @@ def add_promo():
     cursor.execute(sql)
     db.get_db().commit()
     return {"result": 'You have successfully added a new promotion!'}
+
+# promotions GET route to return info on a specific promotion
+@restaurants.route('/restaurants/promotions/<restId>/<name>', methods=['GET'])
+def get_promo(restId, name):
+    current_app.logger.info('restaurant_routes.py: GET /promotions/<restId>/<name>')
+
+    cursor = db.get_db().cursor()
+    cursor.execute('''SELECT name, description, active FROM Promotions WHERE restId = {0} AND LCASE(REPLACE(name, ' ','')) = '{1}';'''.format(restId, str(name).casefold()))
+    # row_headers = [x[0] for x in cursor.description]
+    # json_data = []
+    theData = cursor.fetchall()
+    # for row in theData:
+    #     json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# promotions PUT route to update a promotion
+@restaurants.route('/restaurants/promotions/<restId>/<name>', methods=['PUT'])
+def update_promotion(restId, name):
+    current_app.logger.info('restaurant_routes.py: PUT /promotions/<restId>/<itemName>')
+    # collecting data from the request object 
+    the_data = request.json
+    # return the_data
+    current_app.logger.info(the_data)
+    # extracting the variable
+    new_name = the_data['name']
+    desc = the_data['description']
+    active = the_data['active']
+
+    cursor = db.get_db().cursor()
+    cursor.execute("UPDATE Promotions SET name = '{0}', description = '{1}', active = {2} WHERE restId = {3} AND LCASE(REPLACE(name, ' ','')) = '{4}'".format(new_name, desc, active, restId, str(name).casefold()))
+    db.get_db().commit()
+    return 'Promotion updated!'
 # # Get all restaurants from the DB
 # @restaurants.route('/restaurants', methods=['GET'])
 # def get_restaurants():
