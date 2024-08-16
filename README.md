@@ -37,3 +37,11 @@ This is not just a review app—it's a blend of social sharing and discovery to 
 4. As a restaurant manager, I need to be able to create and then update my promotions so that users remain engaged and can see the current best deals for my restaurant.
 
 ## How to Start the Docker Containers
+In the terminal enter "docker compose down". Then, enter "docker compose up -d".
+Ensure that the .env matches with the specifications below:
+SECRET_KEY=someCrazyS3cR3T!Key.!
+DB_USER=root
+DB_HOST=db
+DB_PORT=3306
+DB_NAME=nomnetwork
+MYSQL_ROOT_PASSWORD=abc123
