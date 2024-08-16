@@ -15,6 +15,6 @@ st.header('NomNetwork Overview of User Behavior')
 st.write(f"### Hi, {st.session_state['first_name']}. " )
 st.write(f"#### Here is a list of the customer demographics.")
 
-data = requests.get('http://api:4000/da/data_analyst/user').json()
+data = requests.get('http://api:4000/da/data_analyst/users').json()
 
 st.dataframe(data)
