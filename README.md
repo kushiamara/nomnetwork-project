@@ -5,18 +5,18 @@ Danielle Williams \
 Kushi Amara \
 April Zhao \
 Henry Butler \
-Zhiyan Yao \
+Zhiyan Yao 
 
 ## Video Explanation of App and its Application Presented By Design Team:
 INSERT LINK HERE
 
 ## How to Start the Docker Containers
 Ensure that the .env matches with the specifications below:
-    SECRET_KEY=someCrazyS3cR3T!Key.!
-    DB_USER=root
-    DB_HOST=db
-    DB_PORT=3306
-    DB_NAME=nomnetwork
+    SECRET_KEY=someCrazyS3cR3T!Key.! \
+    DB_USER=root \
+    DB_HOST=db \
+    DB_PORT=3306 \
+    DB_NAME=nomnetwork \
     MYSQL_ROOT_PASSWORD=abc123
 
 
