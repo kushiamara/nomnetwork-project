@@ -38,6 +38,8 @@ INSERT INTO Users(userId,username,firstName,lastName,email,streetAddress,city,st
 INSERT INTO Users(userId,username,firstName,lastName,email,streetAddress,city,state,zipcode,dob,createdAt,updatedAt) VALUES (38,'khallihan11','Kingsley','Hallihan','khallihan11@goodreads.com','7 Declaration Circle','Boston','MA',02124,'2011-02-07','2018-06-27 04:13:01','2022-10-13 04:58:31');
 INSERT INTO Users(userId,username,firstName,lastName,email,streetAddress,city,state,zipcode,dob,createdAt,updatedAt) VALUES (39,'pfradgley12','Parke','Fradgley','pfradgley12@businessinsider.com','45 John Wall Park','Boston','MA',02109,'2013-09-07','2015-12-18 09:02:48','2024-01-06 06:57:07');
 INSERT INTO Users(userId,username,firstName,lastName,email,streetAddress,city,state,zipcode,dob,createdAt,updatedAt) VALUES (40,'dglasser13','Dre','Glasser','dglasser13@goodreads.com','75 Lake View Parkway','Boston','MA',02119,'2006-10-07','2019-06-09 04:42:00','2021-12-19 14:41:40');
+INSERT INTO Users(userId,username,firstName,lastName,email,streetAddress,city,state,zipcode,dob,createdAt,updatedAt) VALUES (41,'kushiamara','Kushi','Amara','kushiamara@gmail.com','75 Lake View Parkway','Boston','MA',02119,'2004-10-07','2019-06-09 04:42:00','2021-12-19 14:41:40');
+
 
 
 
@@ -419,7 +421,7 @@ INSERT INTO Tags (tagId, tagName, createdAt) VALUES ('26', 'Open Bar', '2024-03-
 INSERT INTO Tags (tagId, tagName, createdAt) VALUES ('27', 'Diner', '2023-12-01 01:18:58');
 INSERT INTO Tags (tagId, tagName, createdAt) VALUES ('28', 'Cafe', '2024-01-04 05:59:01');
 INSERT INTO Tags (tagId, tagName, createdAt) VALUES ('29', 'Grill', '2023-12-04 12:15:56');
-INSERT INTO Tags (tagId, tagName, createdAt) VALUES ('30', 'Cafe', '2023-10-31 16:55:46');
+INSERT INTO Tags (tagId, tagName, createdAt) VALUES ('30', 'Underground', '2023-10-31 16:55:46');
 INSERT INTO Tags (tagId, tagName, createdAt) VALUES ('31', 'Tavern', '2024-05-25 23:38:41');
 INSERT INTO Tags (tagId, tagName, createdAt) VALUES ('32', 'Quick', '2024-01-30 15:02:12');
 INSERT INTO Tags (tagId, tagName, createdAt) VALUES ('33', 'Sit-Down', '2024-07-08 00:58:29');
