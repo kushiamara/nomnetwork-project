@@ -83,7 +83,7 @@ def update_menu_item(restId, itemName):
     cursor = db.get_db().cursor()
     cursor.execute("UPDATE MenuItems SET itemName = '{0}', price = {1}, calories = {2}, photo = '{3}' WHERE restId = {4} AND LCASE(REPLACE(itemName, ' ','')) = '{5}'".format(name, price, calories, photo, restId, str(itemName).casefold()))
     db.get_db().commit()
-    return 'Item updated!'
+    return 'Item Updated!'
 
 # menuitem DELETE route to delete a menu item
 @restaurants.route('/restaurants/menuitem/<restId>/<itemName>', methods=['DELETE'])
@@ -94,7 +94,7 @@ def delete_menu_item(restId, itemName):
     cursor.execute("DELETE FROM MenuItems WHERE restId = {0} AND LCASE(REPLACE(itemName, ' ','')) = '{1}'".format(restId, str(itemName).casefold()))
     db.get_db().commit()
 
-    return 'Item deleted'
+    return 'Item Deleted'
 
 # tags GET method to return all the restaurants tags
 @restaurants.route('/restaurants/tags/<restId>', methods=['GET'])
@@ -146,7 +146,7 @@ def delete_tag(restId, tagId):
     cursor.execute("DELETE FROM RestaurantTags WHERE restId = {0} AND tagId = {1}".format(restId, tagId))
     db.get_db().commit()
 
-    return 'Tag removed'
+    return 'Tag Removed'
 
 # promotions GET route to return all promotions
 @restaurants.route('/restaurants/promotions/<restId>', methods=['GET'])
@@ -221,38 +221,16 @@ def update_promotion(restId, name):
     cursor = db.get_db().cursor()
     cursor.execute("UPDATE Promotions SET name = '{0}', description = '{1}', active = {2} WHERE restId = {3} AND LCASE(REPLACE(name, ' ','')) = '{4}'".format(new_name, desc, active, restId, str(name).casefold()))
     db.get_db().commit()
-    return 'Promotion updated!'
-# # Get all restaurants from the DB
-# @restaurants.route('/restaurants', methods=['GET'])
-# def get_restaurants():
-#     current_app.logger.info('restaurant_routes.py: GET /restaurants')
-#     cursor = db.get_db().cursor()
-#     cursor.execute('SELECT itemName, restId, price, calories, photo FROM MenuItems WHERE restId = 1;')
-#     # row_headers = [x[0] for x in cursor.description]
-#     # json_data = []
-#     theData = cursor.fetchall()
-#     # for row in theData:
-#     #     json_data.append(dict(zip(row_headers, row)))
-#     the_response = make_response(theData)
-#     the_response.status_code = 200
-#     the_response.mimetype = 'application/json'
-#     return the_response
+    return 'Promotion Updated!'
 
-# # Update a menu item
-# @restaurants.route('/restaurants/<newItem>', methods=['PUT'])
-# def update_menu_item():
-#     current_app.logger.info('PUT /restaurants route')
-#     menu_info = request.json
-#     # current_app.logger.info(cust_info)
-#     restId = menu_info['restId']
-#     itemName = menu_info['itemName']
-#     price = menu_info['price']
-#     calories = menu_info['calories']
+# menuitem DELETE route to delete a menu item
+@restaurants.route('/restaurants/promotions/<restId>/<name>', methods=['DELETE'])
+def delete_promotion(restId, name):  
+    current_app.logger.info('restaurant_routes.py: DELETE /promotions/<restId>/<itemName>')
 
-#     query = 'UPDATE MenuItems SET price = %s, calories = %s WHERE restId = %s and itemName = %s'
-#     data = (restId, itemName, price, calories)
-#     cursor = db.get_db().cursor()
-#     r = cursor.execute(query, data)
-#     db.get_db().commit()
-#     return 'Menu item successfully updated!'
+    cursor = db.get_db().cursor()
+    cursor.execute("DELETE FROM Promotions WHERE restId = {0} AND LCASE(REPLACE(name, ' ','')) = '{1}'".format(restId, str(name).casefold()))
+    db.get_db().commit()
+
+    return 'Promotion Deleted'
     
