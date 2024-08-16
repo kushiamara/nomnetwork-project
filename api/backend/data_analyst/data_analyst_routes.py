@@ -42,7 +42,7 @@ def get_tags():
     the_response.mimetype = 'application/json'
     return the_response
 
-# [Tom-2] Return the number of views and comments of each review
+# [Tom-2.1.1] Return the number of views and comments of each review
 @data_analyst.route('/data_analyst/behavior', methods=['GET'])
 def get_reviews():
     current_app.logger.info('data_analyst_routes.py: GET /data_analyst/behavior')
@@ -50,6 +50,54 @@ def get_reviews():
     cursor.execute('SELECT r.reviewId, COUNT(rv.timeViewed) AS numberOfviews, COUNT(c.commentId) AS numberOfComments \
         FROM Reviews r LEFT JOIN ReviewViews rv on r.reviewId = rv.reviewId LEFT JOIN Comments c on r.reviewId = c.reviewID \
         GROUP BY reviewId; ')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# [Tom-2.1.2] Return the reviews with the highest views and comments 
+@data_analyst.route('/data_analyst/behavior/high', methods=['GET'])
+def get_reviews():
+    current_app.logger.info('data_analyst_routes.py: GET /data_analyst/behavior/high')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT u.username, r.reviewId, COUNT(rv.timeViewed) AS NumberOfViews, COUNT(c.commentId) AS NumberOfComments \
+        FROM Reviews r LEFT JOIN ReviewViews rv on r.reviewId = rv.reviewId LEFT JOIN Comments c on r.reviewId = c.reviewID JOIN Users u on u.userId=r.authorId\
+        GROUP BY reviewId \
+        ORDER BY NumberOfViews desc, NumberOfComments desc \
+        LIMIT 15; ')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# [Tom-2.1.3] Return the reviews with the highest views and comments 
+@data_analyst.route('/data_analyst/behavior/low', methods=['GET'])
+def get_reviews():
+    current_app.logger.info('data_analyst_routes.py: GET /data_analyst/behavior/low')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT u.username, r.reviewId, COUNT(rv.timeViewed) AS NumberOfViews, COUNT(c.commentId) AS NumberOfComments \
+        FROM Reviews r LEFT JOIN ReviewViews rv on r.reviewId = rv.reviewId LEFT JOIN Comments c on r.reviewId = c.reviewID JOIN Users u on u.userId=r.authorId\
+        GROUP BY reviewId \
+        ORDER BY NumberOfViews desc, NumberOfComments asc \
+        LIMIT 15; ')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# [Tom-2.2.1] Return the users with the most followers and the amount of reviews they have posted
+@data_analyst.route('/data_analyst/behavior/followers', methods=['GET'])
+def get_reviews():
+    current_app.logger.info('data_analyst_routes.py: GET /data_analyst/behavior/followers')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT u.username, COUNT(r.reviewId) as NumberOfReviews, COUNT(f.followerId) as NumberOfFollowers \
+        FROM Reviews r JOIN Users u on u.userId=r.authorId JOIN Followers f ON f.followeeId=u.userId\
+        GROUP BY u.username \
+        ORDER BY NumberOfFollowers desc\
+        LIMIT 20; ')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
