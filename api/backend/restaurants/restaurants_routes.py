@@ -150,6 +150,19 @@ def add_tag():
     db.get_db().commit()
     return {"result": 'You have successfully added a tag to the restaurant!'}
 
+# tags GET method to find the tagId of the given tag
+@restaurants.route('/restaurants/findtag/<tagName>', methods=['GET'])
+def find_given_tags(tagName):
+    sql = '''SELECT tagId FROM Tags WHERE tagName = '{0}' '''.format(tagName)
+    current_app.logger.info('GET /restaurants/findtag/<tagName> route')
+    cursor = db.get_db().cursor()
+    cursor.execute(sql)
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 # tags DELETE route to delete a tag 
 @restaurants.route('/restaurants/tags/<restId>/<tagId>', methods=['DELETE'])
 def delete_tag(restId, tagId):  

@@ -63,6 +63,7 @@ with st.form(key='add_tag_form'):
             except requests.exceptions.RequestException as e:
                 st.error(f"An error occurred while adding the tag: {e}")
 
+
 # Delete an Existing Tag
 st.header('Delete a Tag')
 
@@ -71,30 +72,40 @@ try:
     response = requests.get(f'http://api:4000/r/restaurants/tags/{var_restid}')
     response.raise_for_status()
     tags = response.json()
-    tag_options = {tag['tagName']: tag['tagId'] for tag in tags}
-    tag_names = list(tag_options.keys())
-except requests.exceptions.RequestException as e:
-    st.error(f"An error occurred while fetching tags for deletion: {e}")
-    tag_names = []
+    tag_names = [tag['tagName'] for tag in tags]
+    
+    # Select a tag currently associated with the restaurant to delete
+    selected_tag_to_delete = st.selectbox('Select a Tag to Delete', ['Choose an option'] + tag_names)
 
-if tag_names:
-    with st.form(key='delete_tag_form'):
-        selected_tag_to_delete = st.selectbox('Select a Tag to Delete', ['Choose an option'] + tag_names)
-        
-        # Submit button for the form
-        delete_button = st.form_submit_button(label='Delete Tag')
-
-        if delete_button:
-            if selected_tag_to_delete == 'Choose an option':
-                st.error("Please select a tag to delete.")
-            else:
-                try:
-                    tag_id = tag_options[selected_tag_to_delete]
+    if selected_tag_to_delete != 'Choose an option':
+        try:
+            # Find the tagId of the selected tag in the Tags table
+            response = requests.get(f'http://api:4000/r/restaurants/findtag/{selected_tag_to_delete}')
+            response.raise_for_status()
+            found_tagId = response.json()
+            
+            # Check if the response contains a valid tagId
+            if found_tagId and isinstance(found_tagId, list) and len(found_tagId) > 0:
+                tag_id = found_tagId[0].get('tagId')
+                
+                if tag_id is not None:
+                    tag_id = int(tag_id)  # Ensure tag_id is an integer
+                    
+                    # Perform the DELETE request
                     delete_url = f'http://api:4000/r/restaurants/tags/{var_restid}/{tag_id}'
-                    response = requests.delete(delete_url)
-                    response.raise_for_status()
-                    st.success('Tag deleted successfully!')
-                except requests.exceptions.RequestException as e:
-                    st.error(f"An error occurred while deleting the tag: {e}")
-else:
-    st.warning("No tags available to delete.")
+                    delete_button = st.button('Delete Tag', type='primary', use_container_width=True)
+
+                    if delete_button:
+                        try:
+                            response = requests.delete(delete_url)
+                            response.raise_for_status()
+                            st.success('Tag deleted successfully!')
+                        except requests.exceptions.RequestException as e:
+                            st.error(f"An error occurred while deleting the tag: {e}")
+        except requests.exceptions.RequestException as e:
+            st.error(f"An error occurred while fetching tagId: {e}")
+    else:
+        st.info("Please select a tag to delete.")
+
+except requests.exceptions.RequestException as e:
+    st.error(f"An error occurred while fetching tags: {e}")
