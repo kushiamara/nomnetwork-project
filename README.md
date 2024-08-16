@@ -8,7 +8,7 @@ Henry Butler \
 Zhiyan Yao 
 
 ## Video Explanation of App and its Application Presented By Design Team:
-INSERT LINK HERE
+[INSERT LINK HERE](https://drive.google.com/file/d/1t0IO2Yp30l-f6RPCpC0aByArSY5oe_bd/view?usp=sharing)
 
 ## How to Start the Docker Containers
 Ensure that the .env matches with the specifications below:
@@ -20,7 +20,7 @@ Ensure that the .env matches with the specifications below:
     MYSQL_ROOT_PASSWORD=abc123
 
 
-In the terminal enter "docker compose down". Then, enter "docker compose up -d". This should start the three containers needed to run this app. The SQL DDL and insert statements created through Mockaroo should automatically execute.
+In the terminal enter "docker compose down". Then, enter "docker compose up -d". This should start the three containes needed to run this app.
 
 
 ## About the App
