@@ -8,7 +8,7 @@ from modules.nav import SideBarLinks
 
 SideBarLinks()
 
-st.write("# Viewing Posts from People I Follow")
+st.write("# Reviews from People I Follow")
 
 data = {} 
 try:
@@ -29,5 +29,5 @@ def url_to_image_html(url):
 # Apply the function to the 'photo' column
 df['photo'] = df['photo'].apply(url_to_image_html)
 
-# Display the DataFrame in Streamlit\
+# Display the DataFrame in Streamlit
 st.markdown(df.to_html(escape=False), unsafe_allow_html=True)

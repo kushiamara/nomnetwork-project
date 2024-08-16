@@ -81,7 +81,7 @@ def update_menu_item(restId, itemName):
     photo = the_data['photo']
 
     cursor = db.get_db().cursor()
-    cursor.execute("UPDATE MenuItems SET itemName = '{0}', price = {1}, calories = {2}, photo = '{3}' WHERE restId = {4} AND LCASE(REPLACE(itemName, ' ','')) = '{5}'".format(name, price, calories, photo, restId, str(itemName).casefold()))
+    cursor.execute("UPDATE MenuItems SET itemName = '{0}', price = {1}, calories = {2}, photo = '{3}' WHERE restId = {4} AND itemName = '{5}' ".format(name, price, calories, photo, restId, itemName))
     db.get_db().commit()
     return 'Item Updated!'
 
@@ -91,7 +91,7 @@ def delete_menu_item(restId, itemName):
     current_app.logger.info('restaurant_routes.py: DELETE /menuitems/<restId>/<itemName>')
 
     cursor = db.get_db().cursor()
-    cursor.execute("DELETE FROM MenuItems WHERE restId = {0} AND LCASE(REPLACE(itemName, ' ','')) = '{1}'".format(restId, str(itemName).casefold()))
+    cursor.execute("DELETE FROM MenuItems WHERE restId = {0} AND itemName = '{1}' ".format(restId, itemName))
     db.get_db().commit()
 
     return 'Item Deleted'
@@ -111,6 +111,19 @@ def get_tags(restId):
     theData = cursor.fetchall()
     # for row in theData:
     #     json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# tags GET method to return all tags existing in the Tags table
+@restaurants.route('/restaurants/gettags', methods=['GET'])
+def find_all_tags():
+    sql = '''SELECT tagName, tagId FROM Tags'''
+    current_app.logger.info('GET /restaurants/gettags route')
+    cursor = db.get_db().cursor()
+    cursor.execute(sql)
+    theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
@@ -137,6 +150,19 @@ def add_tag():
     db.get_db().commit()
     return {"result": 'You have successfully added a tag to the restaurant!'}
 
+# tags GET method to find the tagId of the given tag
+@restaurants.route('/restaurants/findtag/<tagName>', methods=['GET'])
+def find_given_tags(tagName):
+    sql = '''SELECT tagId FROM Tags WHERE tagName = '{0}' '''.format(tagName)
+    current_app.logger.info('GET /restaurants/findtag/<tagName> route')
+    cursor = db.get_db().cursor()
+    cursor.execute(sql)
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 # tags DELETE route to delete a tag 
 @restaurants.route('/restaurants/tags/<restId>/<tagId>', methods=['DELETE'])
 def delete_tag(restId, tagId):  
@@ -157,7 +183,7 @@ def get_reviews_below(restId, rating):
     cursor.execute('''SELECT username, rating, text FROM Restaurants
                         JOIN Reviews  ON Restaurants.restId = Reviews.restId
                         JOIN Users ON Reviews.authorId = Users.userId
-                    WHERE rating < {0} AND Restaurants.restId = {1};'''.format(rating, restId))
+                    WHERE rating <= {0} AND Restaurants.restId = {1};'''.format(rating, restId))
     # row_headers = [x[0] for x in cursor.description]
     # json_data = []
     theData = cursor.fetchall()
@@ -174,7 +200,7 @@ def get_promos(restId):
     current_app.logger.info('restaurant_routes.py: GET /promotions/<restId>')
 
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT name, description, active FROM Promotions WHERE restId = {0};'.format(restId))
+    cursor.execute('SELECT name, description, CASE WHEN active = 1 THEN "Yes" ELSE "No" END as activeStatus FROM Promotions WHERE restId = {0};'.format(restId))
     # row_headers = [x[0] for x in cursor.description]
     # json_data = []
     theData = cursor.fetchall()
@@ -239,7 +265,7 @@ def update_promotion(restId, name):
     active = the_data['active']
 
     cursor = db.get_db().cursor()
-    cursor.execute("UPDATE Promotions SET name = '{0}', description = '{1}', active = {2} WHERE restId = {3} AND LCASE(REPLACE(name, ' ','')) = '{4}'".format(new_name, desc, active, restId, str(name).casefold()))
+    cursor.execute("UPDATE Promotions SET name = '{0}', description = '{1}', active = {2} WHERE restId = {3} AND name = '{4}'".format(new_name, desc, active, restId, name))
     db.get_db().commit()
     return 'Promotion Updated!'
 
