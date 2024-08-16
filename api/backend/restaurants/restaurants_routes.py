@@ -116,6 +116,19 @@ def get_tags(restId):
     the_response.mimetype = 'application/json'
     return the_response
 
+# tags GET method to return all tags existing in the Tags table
+@restaurants.route('/restaurants/gettags', methods=['GET'])
+def find_all_tags():
+    sql = '''SELECT tagName, tagId FROM Tags'''
+    current_app.logger.info('GET /restaurants/gettags route')
+    cursor = db.get_db().cursor()
+    cursor.execute(sql)
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 # tag POST route to add a tag to the restaurant
 @restaurants.route('/restaurants/tags', methods=['POST'])
 def add_tag():
