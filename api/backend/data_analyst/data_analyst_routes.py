@@ -4,11 +4,8 @@
 from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from backend.db_connection import db
-from backend.ml_models.model01 import predict
 
 data_analyst = Blueprint('data_analyst', __name__)
-
-@data_analyst.route('/prediction/<var01>/<var02>', methods=['GET'])
 
 # [Tom-1] Return each resturuant ranked by rating and number of reviews 
 @data_analyst.route('/data_analyst/rest', methods=['GET'])
