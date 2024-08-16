@@ -9,30 +9,52 @@ def HomeNav():
 def AboutPageNav():
     st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
 
-#### ------------------------ Examples for Role of pol_strat_advisor ------------------------
-def PolStratAdvHomeNav():
-    st.sidebar.page_link("pages/00_Data_Analyst.py", label="Data Analyst Home", icon='👤')
+#### ------------------------ Examples for Role of Data Analyst  ------------------------
+def DataAnalystHomeNav():
+    st.sidebar.page_link("pages/00_Data_Analyst_Home.py", label="Data Analyst Home", icon='👤')
 
-def WorldBankVizNav():
-    st.sidebar.page_link("pages/01_Popular_Rest.py", label="Popular Restaurants", icon='🏦')
+def PopularRest():
+    st.sidebar.page_link("pages/01_Popular_Rest.py", label="Popular Restaurants", icon='🥡')
 
-def MapDemoNav():
-    st.sidebar.page_link("pages/02_Popular_Tags.py", label="Popular Tags", icon='🗺️')
+def PopularTags():
+    st.sidebar.page_link("pages/02_Popular_Tags.py", label="Popular Tags", icon='🔗')
 
-## ------------------------ Examples for Role of usaid_worker ------------------------
-def ApiTestNav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon='🛜')
+def CustomerBehavior():
+    st.sidebar.page_link("pages/03_Customer_Behavior.py", label="Customer Behavior", icon='📊')
 
-def PredictionNav():
-    st.sidebar.page_link("pages/11_Prediction.py", label="Regression Prediction", icon='📈')
+def Demographics():
+    st.sidebar.page_link("pages/04_Demographics.py", label="Diner Demographics", icon='👨‍👩‍👧‍👦')
 
-def ClassificationNav():
-    st.sidebar.page_link("pages/13_Classification.py", label="Classification Demo", icon='🌺')
+## ------------------------ Examples for Role of Diner ------------------------
+def DinerHomeNav():
+    st.sidebar.page_link("pages/10_Diner_Home.py", label="Diner Home", icon='👤')
+
+def FolloweeReviews():
+    st.sidebar.page_link("pages/12_Followee_Reviews.py", label="See My Feed", icon='✨')
+
+def SearchRest():
+    st.sidebar.page_link("pages/11_Search_Restaurants.py", label="Search Restaurants", icon='🔍')
+
+def NewReviews():
+    st.sidebar.page_link("pages/13_Post_New_Review.py", label="Post New Review", icon='✍️')
 
 #### ------------------------ System Admin Role ------------------------
-def AdminPageNav():
-    st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon='🖥️')
-    st.sidebar.page_link("pages/21_ML_Model_Mgmt.py", label='ML Model Management', icon='🏢')
+def RestaurantHome():
+    st.sidebar.page_link("pages/20_Restaurant_Home.py", label="Restaurant Home", icon='👤')
+
+def EditMenu():
+    st.sidebar.page_link("pages/21_View_Menu.py", label="Edit My Menu", icon='🍽️')
+
+def EditTags():
+    st.sidebar.page_link("pages/22_View_Tags.py", label="Edit My Tags", icon='🔗')
+
+def ViewReviews():
+    st.sidebar.page_link("pages/23_View_Reviews.py", label="Read Reviews", icon='⭐')
+
+def EditPromo():
+    st.sidebar.page_link("pages/24_View_Promotions.py", label="Edit Promotions", icon='💵')
+
+
 
 
 # --------------------------------Links Function -----------------------------------------------
@@ -57,21 +79,28 @@ def SideBarLinks(show_home=False):
     if st.session_state["authenticated"]:
 
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
-        if st.session_state['role'] == 'pol_strat_advisor':
-            PolStratAdvHomeNav()
-            WorldBankVizNav()
-            MapDemoNav()
+        if st.session_state['role'] == 'data_analyst':
+            DataAnalystHomeNav()
+            PopularRest()
+            PopularTags()
+            CustomerBehavior()
+            Demographics()
 
         # If the user role is usaid worker, show the Api Testing page
-        if st.session_state['role'] == 'usaid_worker':
-            PredictionNav()
-            ApiTestNav() 
-            ClassificationNav()
+        if st.session_state['role'] == 'diner':
+            DinerHomeNav()
+            FolloweeReviews() 
+            SearchRest()
+            NewReviews()
         
         # If the user is an administrator, give them access to the administrator pages
-        if st.session_state['role'] == 'administrator':
-            AdminPageNav()
-
+        if st.session_state['role'] == 'restaurant':
+            RestaurantHome()
+            EditMenu()
+            EditTags()
+            ViewReviews()
+            EditPromo()
+            
     # Always show the About page at the bottom of the list of links
     AboutPageNav()
 

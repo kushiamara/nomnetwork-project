@@ -32,12 +32,29 @@ options = st.multiselect(
     [],
 )
 
-st.write("You selected:", options)
+# Convert list of dictionaries to a single dictionary for quick lookup
+tag_dict = {item["tagName"]: item["tagId"] for item in tags_data}
 
+# st.write("You selected:", options)
+tag_ids = []
 
+# Retrieve and store the tagId for each tagName in list B
+for tag_name in options:
+    tag_id = tag_dict.get(tag_name)
+    if tag_id is not None:  # Check if the tagName is found in the dictionary
+        # Append formatted string to list C
+        tag_ids.append(f"{tag_id}")
+
+# Join the list into a single comma-separated string
+tagid_values = ",".join(tag_ids)
+
+# st.write(tagid_values)
+url = f'http://api:4000/d/diner/restaurants/search?tags={tagid_values}'
+# st.write(url)
 if st.button('Search',
              type='primary',
              use_container_width=True):
-  results = requests.get('http://api:4000/d/diner').json()
+  results = requests.get(url).json()
   st.dataframe(results)
   
+
