@@ -12,8 +12,10 @@ SideBarLinks()
 
 st.title('Post a New Review!')
 
+# pull emily's userID
 author = requests.get('http://api:4000/d/diner/author/emilyThompson').json()
 
+# pull the list of restuarants in the database
 data = requests.get('http://api:4000/d/diner/restaurants').json()
 
 # Create a dictionary for dropdown options with names as keys and IDs as values
@@ -29,7 +31,7 @@ selected_id = options[selected_name]
 var_rating = st.number_input('Rate your experience from 1 to 5',
                            step=0.1)
 
-# Create a multi-line text input box
+# Create a multi-line text input box for user to enter their review
 user_review = st.text_area(
     "Share your thoughts",  # Label for the text area
     value="",  # Default value (can be an empty string)
@@ -37,7 +39,7 @@ user_review = st.text_area(
 )
 
 
-# Create a multi-line text input box
+# Create a multi-line text input box for user to enter image link
 review_photo = st.text_area(
     "Enter your photo link",  # Label for the text area
     value="",  # Default value (can be an empty string)

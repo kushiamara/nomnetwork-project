@@ -10,23 +10,12 @@ SideBarLinks()
 
 st.write("# Viewing Posts from People I Follow")
 
-# """
-# Simply retrieving data from a REST api running in a separate Docker Container.
-
-# If the container isn't running, this will be very unhappy.  But the Streamlit app 
-# should not totally die. 
-# """
 data = {} 
 try:
   data = requests.get('http://api:4000/d/diner/emilyThompson').json()
  
 except:
-  st.write("**Important**: Could not connect to sample api, so using dummy data.")
-  data = {"a":{"b": "123", "c": "test"}, "z": {"b": "456", "c": "goodbye"}}
-
-#data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
-
-# st.dataframe(data)
+  st.write("There are no reviews from the users you follow.")
 
 # Convert the data to a DataFrame
 df = pd.DataFrame(data)

@@ -27,7 +27,7 @@ except requests.RequestException as e:
 
 # Display multiselect with tags as options
 options = st.multiselect(
-    "What restaurant features are you looking for?",
+    "What restaurant features are you looking for? Apply filters below.",
     tag_names,
     [],
 )
@@ -35,7 +35,6 @@ options = st.multiselect(
 # Convert list of dictionaries to a single dictionary for quick lookup
 tag_dict = {item["tagName"]: item["tagId"] for item in tags_data}
 
-# st.write("You selected:", options)
 tag_ids = []
 
 # Retrieve and store the tagId for each tagName in list B
@@ -48,13 +47,26 @@ for tag_name in options:
 # Join the list into a single comma-separated string
 tagid_values = ",".join(tag_ids)
 
-# st.write(tagid_values)
+# storing url to pass into response
 url = f'http://api:4000/d/diner/restaurants/search?tags={tagid_values}'
-# st.write(url)
-if st.button('Search',
-             type='primary',
-             use_container_width=True):
-  results = requests.get(url).json()
-  st.dataframe(results)
+
+if st.button('Search', type='primary', use_container_width=True):
+        try:
+            response = requests.get(url)
+            response.raise_for_status()  # Raise an error for bad status codes
+            results = response.json()
+
+            # Check if the results contain valid data
+            if isinstance(results, list):
+                if results:
+                    st.dataframe(results)
+                else:
+                    st.warning("No restaurants found with the selected tags.")
+            else:
+                st.error("Unexpected response format from the server.")
+                
+        except requests.RequestException as e:
+            st.write("No restaurants found with the selected tags. Consider narrowing your search.")
+
   
 
