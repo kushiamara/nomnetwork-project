@@ -29,7 +29,7 @@ selected_name = st.selectbox('Where did you dine?', list(options.keys()))
 selected_id = options[selected_name]
 
 var_rating = st.number_input('Rate your experience from 1 to 5',
-                           step=0.1)
+                           step=0.1, min_value=0.0, max_value=5.0)
 
 # Create a multi-line text input box for user to enter their review
 user_review = st.text_area(

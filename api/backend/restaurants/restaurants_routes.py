@@ -157,7 +157,7 @@ def get_reviews_below(restId, rating):
     cursor.execute('''SELECT username, rating, text FROM Restaurants
                         JOIN Reviews  ON Restaurants.restId = Reviews.restId
                         JOIN Users ON Reviews.authorId = Users.userId
-                    WHERE rating < {0} AND Restaurants.restId = {1};'''.format(rating, restId))
+                    WHERE rating <= {0} AND Restaurants.restId = {1};'''.format(rating, restId))
     # row_headers = [x[0] for x in cursor.description]
     # json_data = []
     theData = cursor.fetchall()
