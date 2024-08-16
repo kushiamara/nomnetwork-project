@@ -14,15 +14,15 @@ st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
-if st.button('Search for Restaurants', 
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/11_Search_Restaurants.py')
-
 if st.button('View Reviews from People I Follow', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/12_Followee_Reviews.py')
+
+if st.button('Search for Restaurants', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/11_Search_Restaurants.py')
 
 if st.button("Post a New Review",
              type='primary',

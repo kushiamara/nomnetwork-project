@@ -55,7 +55,7 @@ with st.form(key='add_menu_item_form'):
                 result = response.json()
                 st.success(result.get('result', 'Menu item added successfully!'))
             except requests.exceptions.RequestException as e:
-                st.error(f"An error occurred: {e}")
+                st.error("An item with this name already exists. Consider choosing a new name.")
 
 
 # Updating Existing Menu Item
@@ -81,7 +81,7 @@ try:
         update_button = st.form_submit_button(label='Update Menu Item')
 
         if update_button:
-            if not selected_item:
+            if selected_item == 'Select an item to update':
                 st.error("Please select an item to update.")
             else:
                 try:
@@ -119,7 +119,7 @@ try:
         delete_button = st.button('Delete Menu Item', key='delete_menu_item')
 
         if delete_button:
-            if not selected_item:
+            if selected_item == 'Select an item to delete':
                 st.error("Please select an item to delete.")
             else:
                 try:

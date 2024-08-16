@@ -40,10 +40,8 @@ user_review = st.text_area(
 
 
 # Create a multi-line text input box for user to enter image link
-review_photo = st.text_area(
+review_photo = st.text_input(
     "Enter your photo link",  # Label for the text area
-    value="",  # Default value (can be an empty string)
-    height=5  # Height of the text area in pixels
 )
 
 

@@ -51,7 +51,7 @@ with st.form(key='add_menu_item_form'):
                 result = response.json()
                 st.success(result.get('result', 'Promotion added successfully!'))
             except requests.exceptions.RequestException as e:
-                st.error(f"An error occurred: {e}")
+                st.error("A promotion with this name already exists. Consider changing the name.")
 
 
 # Updating Existing Promotion
@@ -78,7 +78,7 @@ try:
         update_button = st.form_submit_button(label='Update Menu Item')
 
         if update_button:
-            if not selected_item:
+            if selected_item == 'Select a promo to update':
                 st.error("Please select an item to update.")
             else:
                 try:

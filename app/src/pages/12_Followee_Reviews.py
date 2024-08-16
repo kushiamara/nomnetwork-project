@@ -8,7 +8,7 @@ from modules.nav import SideBarLinks
 
 SideBarLinks()
 
-st.write("# Viewing Posts from People I Follow")
+st.write("# Reviews from People I Follow")
 
 data = {} 
 try:
