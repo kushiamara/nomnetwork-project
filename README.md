@@ -20,7 +20,7 @@ Ensure that the .env matches with the specifications below:
     MYSQL_ROOT_PASSWORD=abc123
 
 
-In the terminal enter "docker compose down". Then, enter "docker compose up -d". This should start the three containes needed to run this app.
+In the terminal enter "docker compose down". Then, enter "docker compose up -d". This should start the three containers needed to run this app. The SQL DDL and insert statements created through Mockaroo should automatically execute.
 
 
 ## About the App
