@@ -33,4 +33,4 @@ if st.button('Retrieve data on user behavior.',
 if st.button('Analyze customer demographics.', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/04_M04_Demographics.py')
+  st.switch_page('pages/04_Demographics.py')
