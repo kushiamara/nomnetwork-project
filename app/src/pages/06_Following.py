@@ -9,12 +9,13 @@ import requests
 SideBarLinks()
 
 # set the header of the page
-st.header('NomNetwork Overview of User Behavior')
+st.header('NomNetwork Overview of User Behavior:')
+st.write(f"## Posting Reviews")
+st.write(' ')
 
 # You can access the session state to make a more customized/personalized app experience
-st.write(f"### Hi, {st.session_state['first_name']}. " )
-st.write(f"#### Here is a list of the customer demographics.")
+st.write(f"##### This is the list of the top 20 users with the most followers and the amount of reviews they have posted. ")
 
-data = requests.get('http://api:4000/da/data_analyst/users').json()
+data = requests.get('http://api:4000/da/data_analyst/behavior/followers').json()
 
 st.dataframe(data)

@@ -16,8 +16,15 @@ st.header('NomNetwork Overview of User Behavior')
 
 # You can access the session state to make a more customized/personalized app experience
 st.write(f"### Hi, {st.session_state['first_name']}. " )
-st.write(f"#### Here is data for comment and view count of every review posted on the app.")
+st.write(f"#### What user behavior would you like to investigate?")
 
-data = requests.get('http://api:4000/da/data_analyst/behavior').json()
+if st.button('Posting Reviews and Comments', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/05_Posting_Reviews.py')
 
-st.dataframe(data)
+if st.button('Following', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/06_Following.py')
+
