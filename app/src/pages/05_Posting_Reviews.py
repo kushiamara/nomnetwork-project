@@ -12,12 +12,6 @@ SideBarLinks()
 st.header('NomNetwork Overview of User Behavior:')
 st.write(f"## Posting Reviews")
 st.write(' ')
-# You can access the session state to make a more customized/personalized app experience
-st.write(f"##### This is the list of the number of views and comments of each review. ")
-
-data = requests.get('http://api:4000/da/data_analyst/behavior').json()
-
-st.dataframe(data)
 
 if st.button('Click here to see the reviews with the highest views and interactions.', 
              type='primary',
