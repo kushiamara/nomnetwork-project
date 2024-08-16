@@ -81,7 +81,7 @@ def update_menu_item(restId, itemName):
     photo = the_data['photo']
 
     cursor = db.get_db().cursor()
-    cursor.execute("UPDATE MenuItems SET itemName = '{0}', price = {1}, calories = {2}, photo = '{3}' WHERE restId = {4} AND LCASE(REPLACE(itemName, ' ','')) = '{5}'".format(name, price, calories, photo, restId, str(itemName).casefold()))
+    cursor.execute("UPDATE MenuItems SET itemName = '{0}', price = {1}, calories = {2}, photo = '{3}' WHERE restId = {4} AND itemName = '{5}' ".format(name, price, calories, photo, restId, itemName))
     db.get_db().commit()
     return 'Item Updated!'
 
@@ -91,7 +91,7 @@ def delete_menu_item(restId, itemName):
     current_app.logger.info('restaurant_routes.py: DELETE /menuitems/<restId>/<itemName>')
 
     cursor = db.get_db().cursor()
-    cursor.execute("DELETE FROM MenuItems WHERE restId = {0} AND LCASE(REPLACE(itemName, ' ','')) = '{1}'".format(restId, str(itemName).casefold()))
+    cursor.execute("DELETE FROM MenuItems WHERE restId = {0} AND itemName = '{1}' ".format(restId, itemName))
     db.get_db().commit()
 
     return 'Item Deleted'
