@@ -56,6 +56,7 @@ diner = Blueprint('diner', __name__)
 #     db.get_db().commit()
 #     return 'Menu item successfully updated!'
 
+# [Emily-3]
 # Get reviews for the people that the given userId follows
 @diner.route('/diner/<username>', methods=['GET'])
 def get_reviews(username):
@@ -79,6 +80,7 @@ def get_reviews(username):
     the_response.mimetype = 'application/json'
     return the_response
 
+# [Emily-2]
 # add a new review to the app
 @diner.route('/diner', methods=['POST'])
 def add_new_review():
@@ -106,31 +108,7 @@ def add_new_review():
     return {"result": 'You have successfully added a review!'}
 
 
-# search for restaurants based on tags
-@diner.route('/diner', methods=['GET'])
-def search_restaurants():
-    # Retrieve the 'tags' query parameter
-    tags = request.args.get('tags', default='', type=str)
-    sql = '''SELECT DISTINCT
-        restName as RestaurantName,
-        websiteLink
-        FROM Restaurants r
-        JOIN RestaurantTags rt ON r.restId = rt.restId
-        JOIN Tags t ON rt.tagId = t.tagId
-        WHERE rt.tagId in ({0})'''.format(tags)
-    # return sql
-    current_app.logger.info('GET /diner route')
-    cursor = db.get_db().cursor()
-    cursor.execute(sql)
-    # row_headers = [x[0] for x in cursor.description]
-    # json_data = []
-    theData = cursor.fetchall()
-    # for row in theData:
-    #     json_data.append(dict(zip(row_headers, row)))
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
+
 
 # display all restaurant names
 @diner.route('/diner/restaurants', methods=['GET'])
@@ -169,12 +147,45 @@ def find_author(username):
     the_response.mimetype = 'application/json'
     return the_response 
 
+
+# [Emily-1]
 # find list of all tags
 @diner.route('/diner/tags', methods=['GET'])
 def find_tags():
     sql = '''SELECT tagName, tagId FROM Tags'''
     # return sql
     current_app.logger.info('GET /diner/tags route')
+    cursor = db.get_db().cursor()
+    cursor.execute(sql)
+    # row_headers = [x[0] for x in cursor.description]
+    # json_data = []
+    theData = cursor.fetchall()
+    # for row in theData:
+    #     json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# search for restuareants
+# search for restaurants based on tags
+@diner.route('/diner/restaurants/search', methods=['GET'])
+def search_restaurants():
+    # Retrieve the 'tags' query parameter
+    tags = request.args.get('tags', default='', type=str)
+    tags_length = len(tags.split(","))
+    # return {"len": tags_length}
+    sql = '''SELECT DISTINCT
+        restName as RestaurantName,
+        websiteLink
+        FROM Restaurants r
+        JOIN RestaurantTags rt ON r.restId = rt.restId
+        JOIN Tags t ON rt.tagId = t.tagId
+        WHERE rt.tagId in ({0})
+        GROUP BY r.restName, r.websiteLink
+        HAVING COUNT(DISTINCT t.tagName) = {1} '''.format(tags, tags_length)
+    # return sql
+    current_app.logger.info('GET /diner route')
     cursor = db.get_db().cursor()
     cursor.execute(sql)
     # row_headers = [x[0] for x in cursor.description]
