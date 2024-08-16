@@ -5,34 +5,16 @@ import streamlit as st
 from modules.nav import SideBarLinks
 import requests
 
-st.set_page_config(layout = 'wide')
-
-# Display the appropriate sidebar links for the role of the logged in user
+# Call the SideBarLinks from the nav module in the modules directory
 SideBarLinks()
 
-st.title('Prediction with Regression')
+# set the header of the page
+st.header('NomNetwork Overview of User Behavior')
 
-# create a 2 column layout
-col1, col2 = st.columns(2)
+# You can access the session state to make a more customized/personalized app experience
+st.write(f"### Hi, {st.session_state['first_name']}. " )
+st.write(f"#### Here is a list of the customer demographics.")
 
-# add one number input for variable 1 into column 1
-with col1:
-  var_01 = st.number_input('Variable 01:',
-                           step=1)
+data = requests.get('http://api:4000/da/data_analyst/user').json()
 
-# add another number input for variable 2 into column 2
-with col2:
-  var_02 = st.number_input('Variable 02:',
-                           step=1)
-
-logger.info(f'var_01 = {var_01}')
-logger.info(f'var_02 = {var_02}')
-
-# add a button to use the values entered into the number field to send to the 
-# prediction function via the REST API
-if st.button('Calculate Prediction',
-             type='primary',
-             use_container_width=True):
-  results = requests.get(f'http://api:4000/c/prediction/{var_01}/{var_02}').json()
-  st.dataframe(results)
-  
+st.dataframe(data)
