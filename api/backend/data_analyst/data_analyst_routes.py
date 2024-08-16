@@ -63,8 +63,8 @@ def get_reviews_high():
     current_app.logger.info('data_analyst_routes.py: GET /data_analyst/behavior/high')
     cursor = db.get_db().cursor()
     cursor.execute('SELECT u.username, r.reviewId, COUNT(rv.timeViewed) AS NumberOfViews, COUNT(c.commentId) AS NumberOfComments \
-        FROM Reviews r  JOIN ReviewViews rv on r.reviewId = rv.reviewId  JOIN Comments c on r.reviewId = c.reviewID  JOIN Users u on u.userId=r.authorId\
-        GROUP BY reviewId \
+        FROM Reviews r LEFT JOIN ReviewViews rv on r.reviewId = rv.reviewId LEFT JOIN Comments c on r.reviewId = c.reviewID  JOIN Users u on u.userId=r.authorId\
+        GROUP BY u.username, r.reviewId \
         ORDER BY NumberOfViews desc, NumberOfComments desc \
         LIMIT 15; ')
     theData = cursor.fetchall()
